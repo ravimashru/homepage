@@ -1,14 +1,15 @@
 import { Link } from 'gatsby';
 import React from 'react';
+// import rmWhite from '../images/rm-hires.png';
 
 const Header = () => (
-  <header>
-    <div style={{display: 'flex'}}>
-      <Link class="header-link" to="/">Ravi Mashru</Link>
+  <header style={{backgroundColor: '#323232', color: 'white', height: '48px'}}>
+    <div style={{display: 'flex', alignItems: 'center', maxWidth: 960, margin: '0 auto', height: 'inherit'}}>
+      <Link activeClassName="header-link" class="header-link" to="/">Ravi Mashru</Link>
       <div style={{margin: 'auto'}}></div>
-      <Link activeClassName="header-link-active" class="header-link" to="/page-2">Blog</Link>
-      <Link class="header-link" to="/reading-list">Reading List</Link>
-      <Link class="header-link" to="https://github.com/mashruravi/notes" target="_blank">Notes</Link>
+      <Link activeClassName="header-link" class="header-link" to="/page-2">Blog</Link>
+      <Link activeClassName="header-link" class="header-link" to="/reading-list">Reading List</Link>
+      <a class="header-link" href="https://github.com/mashruravi/notes" target="_blank">Notes</a>
     </div>
   </header>
 );

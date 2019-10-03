@@ -22,8 +22,8 @@ module.exports = {
         name: `Ravi Mashru's Home Page`,
         short_name: `Ravi Mashru`,
         start_url: `/homepage`,
-        background_color: `#000000`,
-        theme_color: `#FFFFFF`,
+        background_color: `#323232`,
+        theme_color: `#323232`,
         display: `standalone`,
         icon: `src/images/rm-hires.png`, // This path is relative to the root of the site.
       },
