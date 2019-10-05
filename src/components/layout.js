@@ -26,7 +26,7 @@ const Layout = ({ children }) => {
   return (
     <>
       <Header />
-      <div
+      <main
         style={{
           margin: `0 auto`,
           maxWidth: 960,
@@ -35,13 +35,19 @@ const Layout = ({ children }) => {
           paddingTop: 0,
         }}
       >
-        <main>{children}</main>
-        <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </footer>
-      </div>
+        {children}
+      </main>
+      <footer style={{ backgroundColor: '#F5F5F7', padding: '16px' }}>
+        <div
+          style={{
+            maxWidth: 960,
+            minWidth: 300,
+            margin: `0 auto`,
+          }}
+        >
+          © {new Date().getFullYear()} Ravi Suresh Mashru. All rights reserved.
+        </div>
+      </footer>
     </>
   );
 };
