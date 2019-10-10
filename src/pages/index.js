@@ -17,51 +17,67 @@ const IndexPage = () => (
     <Link to="/page-2/">Go to page 2</Link> */}
 
     {/* GitHub admin, devX Talks */}
-    <div style={{ backgroundColor: 'white', color: 'black', padding: '64px' }}>
-      <div
-        style={{
-          display: 'flex',
-          margin: `0 auto`,
-          maxWidth: 960,
-          minWidth: 300,
-        }}
-      >
+    <div className="homepage-section">
+      <div className="homepage-section-wrapper">
         <>
-          <img src={me} alt="" height="300px" />
+          <img src={me} alt="" height="250px" />
         </>
-        <div style={{padding: '32px 24px'}}>
-          <p>
+        <div style={{ padding: '32px 24px', fontSize: '19px' }}>
+          <div>
             Hi! My name is Ravi Mashru. I am a full-stack developer working at
             SAP Labs in Bangalore, India.
-          </p>
-          <p>
-            On a normal day, I work with the following tools and technologies:
-          </p>
-          <ul>
-            <li>Angular</li>
-            <li>ABAP</li>
-            <li>NodeJS</li>
-            <li>React</li>
-            <li>Jenkins</li>
-          </ul>
+          </div>
+          <div>
+            I am also one of the administrators of SAP's enterprise installation
+            of GitHub.
+          </div>
         </div>
       </div>
     </div>
-    {/* 
-    <p>I like spending my free time building things. These are some of the things I've worked on:</p>
-    <ul>
-      <li>DataTau</li>
-      <li>Randomizer</li>
-      <li>Cellular Automata</li>
-      <li>Website for Skyworld</li>
-    </ul>
 
-    <p>I have also started dipping my feet into the world of machine learning and deep learning. Here's a few things I've done:</p>
-    <ul>
-      <li>EIP</li>
-      <li>GANdalf</li>
-      <li>Institute of AI</li>
-    </ul> */}
+    <div className="homepage-section">
+      <div className="homepage-section-wrapper">
+        <div style={{ marginTop: '16px' }}>
+          On a normal day, I work with the following tools and technologies:
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+          <div className="tech-item">Angular</div>
+          <div className="tech-item">ABAP</div>
+          <div className="tech-item">NodeJS</div>
+          <div className="tech-item">React</div>
+          <div className="tech-item">Jenkins</div>
+        </div>
+      </div>
+    </div>
+
+    <div className="homepage-section">
+      <div className="homepage-section-wrapper">
+        <p>
+          I like spending my free time building things. These are some of the
+          things I've worked on:
+        </p>
+        <ul>
+          <li>DataTau</li>
+          <li>Randomizer</li>
+          <li>Cellular Automata</li>
+          <li>Website for Skyworld</li>
+        </ul>
+      </div>
+    </div>
+
+    <div className="homepage-section">
+      <div className="homepage-section-wrapper">
+        <p>
+          I have also started dipping my feet into the world of machine learning
+          and deep learning. Here's a few things I've done:
+        </p>
+        <ul>
+          <li>EIP</li>
+          <li>GANdalf</li>
+          <li>Institute of AI</li>
+        </ul>
+      </div>
+    </div>
   </Layout>
 );
 

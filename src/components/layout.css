@@ -15,7 +15,25 @@ body {
   margin: 0 12px;
 }
 
+.tech-item {
+  border: 1px solid black;
+  padding: 8px;
+  margin: 8px;
+}
 
+.homepage-section {
+  background-color: #fafafa;
+  color: black;
+  padding: 64px;
+  margin-bottom: 8px;
+}
+
+.homepage-section-wrapper {
+  margin: 0 auto;
+  max-width: 960;
+  min-width: 300;
+  text-align: center;
+}
 
 /* html {
   font-family: sans-serif;
