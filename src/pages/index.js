@@ -1,9 +1,9 @@
-import React from "react"
-import { Link } from "gatsby"
+import React from 'react';
+import { Link } from 'gatsby';
 
-import Layout from "../components/layout"
-import Image from "../components/image"
-import SEO from "../components/seo"
+import Layout from '../components/layout';
+import SEO from '../components/seo';
+import me from '../images/me.png';
 
 const IndexPage = () => (
   <Layout>
@@ -15,17 +15,39 @@ const IndexPage = () => (
       <Image />
     </div>
     <Link to="/page-2/">Go to page 2</Link> */}
-    <p>I am a full-stack developer working for SAP Labs based in Bangalore, India.</p>
 
-    <p>I work with the following tools and technologies:</p>
-    <ul>
-      <li>Angular</li>
-      <li>ABAP</li>
-      <li>NodeJS</li>
-      <li>React</li>
-      <li>Jenkins</li>
-    </ul>
-
+    {/* GitHub admin, devX Talks */}
+    <div style={{ backgroundColor: 'white', color: 'black', padding: '64px' }}>
+      <div
+        style={{
+          display: 'flex',
+          margin: `0 auto`,
+          maxWidth: 960,
+          minWidth: 300,
+        }}
+      >
+        <>
+          <img src={me} alt="" height="300px" />
+        </>
+        <div style={{padding: '32px 24px'}}>
+          <p>
+            Hi! My name is Ravi Mashru. I am a full-stack developer working at
+            SAP Labs in Bangalore, India.
+          </p>
+          <p>
+            On a normal day, I work with the following tools and technologies:
+          </p>
+          <ul>
+            <li>Angular</li>
+            <li>ABAP</li>
+            <li>NodeJS</li>
+            <li>React</li>
+            <li>Jenkins</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    {/* 
     <p>I like spending my free time building things. These are some of the things I've worked on:</p>
     <ul>
       <li>DataTau</li>
@@ -39,9 +61,8 @@ const IndexPage = () => (
       <li>EIP</li>
       <li>GANdalf</li>
       <li>Institute of AI</li>
-    </ul>
-    
+    </ul> */}
   </Layout>
-)
+);
 
-export default IndexPage
+export default IndexPage;

@@ -28,11 +28,11 @@ const Layout = ({ children }) => {
       <Header />
       <main
         style={{
-          margin: `0 auto`,
-          maxWidth: 960,
-          minWidth: 300,
-          padding: `0px 1.0875rem 1.45rem`,
-          paddingTop: 0,
+          // margin: `0 auto`,
+          // maxWidth: 960,
+          // minWidth: 300,
+          // padding: `0px 1.0875rem 1.45rem`,
+          // paddingTop: 0,
         }}
       >
         {children}
