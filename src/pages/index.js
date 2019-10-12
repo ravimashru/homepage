@@ -22,14 +22,25 @@ const IndexPage = () => (
         <>
           <img src={me} alt="" height="250px" />
         </>
-        <div style={{ padding: '32px 24px', fontSize: '19px' }}>
+        <div style={{ padding: '32px 24px' }}>
           <div>
-            Hi! My name is Ravi Mashru. I am a full-stack developer working at
-            SAP Labs in Bangalore, India.
+            <p>Hello! My name is <strong>Ravi Mashru</strong>.</p>
+            <p>I am a full-stack developer and GitHub administrator at SAP Labs
+            in Bangalore, India.</p>
           </div>
-          <div>
-            I am also one of the administrators of SAP's enterprise installation
-            of GitHub.
+        </div>
+        <div className="social-icon-container">
+          <div className="social-icon si">
+            <a href="https://www.linkedin.com/in/ravi-mashru-4a7ba956/" target="_blank">i</a>
+          </div>
+          <div className="social-icon si">
+            <a href="https://twitter.com/mashruravi" target="_blank">l</a>
+          </div>
+          <div className="social-icon sip">
+            <a href="mailto:mashru.ravi@gmail.com">m</a>
+          </div>
+          <div className="social-icon sip">
+            <a href="https://github.com/mashruravi" target="_blank">z</a>
           </div>
         </div>
       </div>
@@ -38,14 +49,17 @@ const IndexPage = () => (
     <div className="homepage-section">
       <div className="homepage-section-wrapper">
         <div style={{ marginTop: '16px' }}>
-          On a normal day, I work with the following tools and technologies:
+          On a normal day, I spend my time working with:
         </div>
-        <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }}>
+          <div className="tech-item">HTML/CSS/JavaScript</div>
           <div className="tech-item">Angular</div>
+          <div className="tech-item">React</div>
           <div className="tech-item">ABAP</div>
           <div className="tech-item">NodeJS</div>
-          <div className="tech-item">React</div>
           <div className="tech-item">Jenkins</div>
+          <div className="tech-item">Python</div>
+          <div className="tech-item">BASH scripts</div>
         </div>
       </div>
     </div>

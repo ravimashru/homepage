@@ -1,24 +1,35 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway|Roboto&display=swap');
 
+@font-face {
+  font-family: 'Socialico';
+  src: url('../../static/fonts/Socialico-Regular.woff');
+}
+
+@font-face {
+  font-family: 'SocialicoPlus';
+  src: url('../../static/fonts/SocialicoPlus-Plus.woff');
+}
+
 body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: "Roboto", Helvetica, Arial, sans-serif;
+  font-family: 'Roboto', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
 .header-link {
   color: white;
   text-decoration: none;
-  font-family: "Raleway";
-
+  font-family: 'Raleway';
   margin: 0 12px;
 }
 
 .tech-item {
   border: 1px solid black;
-  padding: 8px;
+  padding: 16px;
   margin: 8px;
+  width: 180px;
 }
 
 .homepage-section {
@@ -33,6 +44,29 @@ body {
   max-width: 960;
   min-width: 300;
   text-align: center;
+}
+
+.social-icon-container {
+  font-size: 64px;
+  display: flex;
+  justify-content: center;;
+}
+
+.social-icon {
+  margin: 0 8px;
+}
+
+.social-icon > a {
+  text-decoration: none;
+  color: black;
+}
+
+.si {
+  font-family: 'Socialico'
+}
+
+.sip {
+  font-family: 'SocialicoPlus'
 }
 
 /* html {
