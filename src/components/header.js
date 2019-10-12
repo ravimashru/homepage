@@ -3,7 +3,7 @@ import React from 'react';
 // import rmWhite from '../images/rm-hires.png';
 
 const Header = () => (
-  <header style={{backgroundColor: '#323232', color: 'white', height: '48px'}}>
+  <header style={{backgroundColor: 'rgba(0,0,0,0.9)', color: 'white', height: '48px'}}>
     <div style={{display: 'flex', alignItems: 'center', maxWidth: 960, margin: '0 auto', height: 'inherit'}}>
       <Link activeClassName="header-link" className="header-link" to="/">Ravi Mashru</Link>
       <div style={{margin: 'auto'}}></div>

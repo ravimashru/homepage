@@ -25,25 +25,68 @@ body {
   margin: 0 12px;
 }
 
+.homepage-section-grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .tech-item {
-  border: 1px solid black;
+  font-size: 1.5em;
+  box-sizing: border-box;
   padding: 16px;
-  margin: 8px;
-  width: 180px;
+  margin: 4px;
+  width: calc(25% - 8px);
+  height: 100px;
+  background-color: #f5f5f5;
+  color: black;
+  display: flex;
+}
+
+@media only screen and (max-width: 1140px) {
+  .tech-item {
+    font-size: 1.2em;
+  }
+}
+
+@media only screen and (max-width: 930px) {
+  .tech-item {
+    font-size: 1em;
+  }
+}
+
+@media only screen and (max-width: 820px) {
+  .tech-item {
+    width: calc(50% - 8px);
+  }
+}
+
+.tech-item > span {
+  margin: auto;
 }
 
 .homepage-section {
-  background-color: #fafafa;
+  background-color: #f5f5f5;
   color: black;
-  padding: 64px;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
+}
+
+.homepage-section.inverted {
+  background-color: black;
+  color: white;
+}
+
+.homepage-section.grid {
+  background-color: white;
+  margin-left: 4px;
+  margin-right: 4px;
 }
 
 .homepage-section-wrapper {
   margin: 0 auto;
-  max-width: 960;
-  min-width: 300;
+  max-width: 960px;
+  min-width: 300px;
   text-align: center;
+  padding: 48px;
 }
 
 .social-icon-container {
