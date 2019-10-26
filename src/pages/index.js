@@ -52,7 +52,7 @@ const IndexPage = () => (
 
     <div className="homepage-section inverted">
       <div className="homepage-section-wrapper">
-        <div style={{fontSize: '20px'}}>On a normal day, I spend my time working with...</div>
+        <div style={{fontSize: '20px'}}>On a normal day, I work with...</div>
       </div>
     </div>
 
@@ -69,28 +69,34 @@ const IndexPage = () => (
       </div>
     </div>
 
-    <div className="homepage-section">
+    <div className="homepage-section inverted">
       <div className="homepage-section-wrapper">
-        <p>
-          I like spending my free time building things. Some of :
-        </p>
-        <ul>
-          <li>DataTau</li>
-          <li>Randomizer</li>
-          <li>Cellular Automata</li>
-          <li>Website for Skyworld</li>
-        </ul>
+        <div style={{fontSize: '20px'}}>In my spare time, I work on side projects like...</div>
       </div>
     </div>
 
     <div className="homepage-section">
       <div className="homepage-section-wrapper">
-        <p>
-          I have also started dipping my feet into the world of machine learning
-          and deep learning. Here's a few things I've done:
-        </p>
         <ul>
-          <li>EIP</li>
+          <li>DataTau</li>
+          <li>Randomizer</li>
+          <li>Cellular Automata</li>
+          <li>Website for Skyworld (WIP)</li>
+          <li>Website for The Holy Kitchen (WIP)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div className="homepage-section inverted">
+      <div className="homepage-section-wrapper">
+        <div style={{fontSize: '20px'}}>I also like playing around with machine learning and deep learning...</div>
+      </div>
+    </div>
+
+    <div className="homepage-section">
+      <div className="homepage-section-wrapper">
+        <ul>
+          <li>tiny-imagenet</li>
           <li>GANdalf</li>
           <li>Institute of AI</li>
         </ul>
