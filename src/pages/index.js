@@ -52,7 +52,7 @@ const IndexPage = () => (
 
     <div className="homepage-section inverted">
       <div className="homepage-section-wrapper">
-        <div style={{fontSize: '20px'}}>On a normal day, I work with...</div>
+        <div style={{fontSize: '20px'}}>Technologies I work with everyday</div>
       </div>
     </div>
 
@@ -71,7 +71,7 @@ const IndexPage = () => (
 
     <div className="homepage-section inverted">
       <div className="homepage-section-wrapper">
-        <div style={{fontSize: '20px'}}>In my spare time, I work on side projects like...</div>
+        <div style={{fontSize: '20px'}}>Projects I spend my spare time working on</div>
       </div>
     </div>
 
@@ -79,26 +79,13 @@ const IndexPage = () => (
       <div className="homepage-section-wrapper">
         <ul>
           <li>DataTau</li>
-          <li>Randomizer</li>
+          <li>Institute of AI</li>
+          <li>GANdalf</li>
+          <li>tiny-imagenet</li>
           <li>Cellular Automata</li>
           <li>Website for Skyworld (WIP)</li>
           <li>Website for The Holy Kitchen (WIP)</li>
-        </ul>
-      </div>
-    </div>
-
-    <div className="homepage-section inverted">
-      <div className="homepage-section-wrapper">
-        <div style={{fontSize: '20px'}}>I also like playing around with machine learning and deep learning...</div>
-      </div>
-    </div>
-
-    <div className="homepage-section">
-      <div className="homepage-section-wrapper">
-        <ul>
-          <li>tiny-imagenet</li>
-          <li>GANdalf</li>
-          <li>Institute of AI</li>
+          <li>Randomizer</li>
         </ul>
       </div>
     </div>
