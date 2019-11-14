@@ -48,15 +48,36 @@ const IndexPage = () => (
           </div>
         </div>
       </div>
+      <div style={{ textAlign: 'center' }}>
+        <div style={{ fontSize: '20px', margin: '16px 0' }}>Tools and technologies I work with everyday</div>
+        <div className="tech-item-container">
+          <div className="tech-item"><span>HTML/CSS/JavaScript</span></div>
+          <div className="tech-item"><span>Angular</span></div>
+          <div className="tech-item"><span>React</span></div>
+          <div className="tech-item"><span>ABAP</span></div>
+          <div className="tech-item"><span>NodeJS</span></div>
+          <div className="tech-item"><span>Jenkins</span></div>
+          <div className="tech-item"><span>Python</span></div>
+          <div className="tech-item"><span>BASH scripts</span></div>
+        </div>
+      </div>
+
+      <div style={{ textAlign: 'center', marginTop: '36px' }}>
+        <div style={{ fontSize: '20px' }}>Things I do in my spare time</div>
+        <div className="project-container">
+          <div className="project-item"></div>
+        </div>
+      </div>
+
     </div>
 
-    <div className="homepage-section inverted">
+    {/* <div className="homepage-section inverted">
       <div className="homepage-section-wrapper">
         <div style={{fontSize: '20px'}}>Technologies I work with everyday</div>
       </div>
-    </div>
+    </div> */}
 
-    <div className="homepage-section grid">
+    {/* <div className="homepage-section grid">
       <div className="homepage-section-grid">
           <div className="tech-item"><span>HTML/CSS/JavaScript</span></div>
           <div className="tech-item"><span>Angular</span></div>
@@ -67,9 +88,9 @@ const IndexPage = () => (
           <div className="tech-item"><span>Python</span></div>
           <div className="tech-item"><span>BASH scripts</span></div>
       </div>
-    </div>
+    </div> */}
 
-    <div className="homepage-section inverted">
+    {/* <div className="homepage-section inverted">
       <div className="homepage-section-wrapper">
         <div style={{fontSize: '20px'}}>Projects I spend my spare time working on</div>
       </div>
@@ -88,7 +109,7 @@ const IndexPage = () => (
           <li>Randomizer</li>
         </ul>
       </div>
-    </div>
+    </div> */}
   </Layout>
 );
 

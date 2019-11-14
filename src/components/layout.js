@@ -31,7 +31,7 @@ const Layout = ({ children }) => {
       <main style={{ paddingTop: '48px' }}>
         {children}
       </main>
-      <footer style={{ backgroundColor: '#F5F5F7', padding: '16px' }}>
+      <footer style={{ backgroundColor: '#F5F5F7', padding: '16px', color: '#777', fontSize: '12px' }}>
         <div
           style={{
             maxWidth: 960,
