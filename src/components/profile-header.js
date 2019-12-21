@@ -1,10 +1,12 @@
 import React from 'react';
+import memoji from '../images/memoji.png'
 
 export default function ProfileHeader() {
   return (
     <div className="prf-hdr-ctr">
       <div className="prf-hdr-img">
-        <div style={{ borderRadius: '100%', backgroundColor: 'gray', height: '135px', width: '115px' }}></div>
+        {/* <div style={{ borderRadius: '100%', backgroundColor: 'gray', height: '135px', width: '115px' }}></div> */}
+        <img src={memoji} height="200px" />
       </div>
       <div className="prf-hdr-intro">
         <div>Hello! I am <strong>Ravi Mashru</strong>.</div>

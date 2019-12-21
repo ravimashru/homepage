@@ -45,7 +45,7 @@ header {
   font-size: 36px;
   margin: 36px;
   display: grid;
-  grid-template-columns: minmax(200px, 20%) auto;
+  grid-template-columns: minmax(250px, 25%) auto;
 }
 
 .prf-hdr-intro > div {
@@ -60,7 +60,7 @@ header {
 
 .prf-hdr-social {
   display: flex;
-  margin-top: 24px;
+  /* margin-top: 24px; */
 }
 
 .social-icon {
