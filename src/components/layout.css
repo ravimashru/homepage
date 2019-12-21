@@ -18,12 +18,72 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+header {
+  height: 98px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 16px;
+}
+
 .header-link {
-  color: white;
+  color: #6c6c6c;
   text-decoration: none;
   font-family: 'Raleway';
-  margin: 0 12px;
+  margin: 0 18px;
+  padding: 8px 16px;
+  border-radius: 10px;
 }
+
+.active-header-link {
+  color: white;
+  background-color: #6c6c6c;
+}
+
+.prf-hdr-ctr {
+  color: #6c6c6c;
+  font-size: 36px;
+  margin: 36px;
+  display: grid;
+  grid-template-columns: minmax(200px, 20%) auto;
+}
+
+.prf-hdr-intro > div {
+  line-height: 36px;
+  margin-bottom: 36px;
+}
+
+.prf-hdr-img {
+  /* margin: 16px; */
+  margin: auto;
+}
+
+.prf-hdr-social {
+  display: flex;
+  margin-top: 24px;
+}
+
+.social-icon {
+  margin: 0 8px;
+  font-size: 64px;
+}
+
+.social-icon > a {
+  text-decoration: none;
+  color: #6c6c6c;
+}
+
+.si {
+  font-family: 'Socialico'
+}
+
+.sip {
+  font-family: 'SocialicoPlus'
+}
+
+
+
+
 
 .homepage-section-grid {
   display: flex;
@@ -101,22 +161,6 @@ body {
   justify-content: center;;
 }
 
-.social-icon {
-  margin: 0 8px;
-}
-
-.social-icon > a {
-  text-decoration: none;
-  color: black;
-}
-
-.si {
-  font-family: 'Socialico'
-}
-
-.sip {
-  font-family: 'SocialicoPlus'
-}
 
 /* html {
   font-family: sans-serif;

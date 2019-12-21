@@ -28,10 +28,10 @@ const Layout = ({ children }) => {
       <div style={{ position: 'fixed', top: 0, left: 0, right: 0 }}>
         <Header />
       </div>
-      <main style={{ paddingTop: '48px' }}>
+      <main style={{ paddingTop: '98px' }}>
         {children}
       </main>
-      <footer style={{ backgroundColor: '#F5F5F7', padding: '16px', color: '#777', fontSize: '12px' }}>
+      {/* <footer style={{ backgroundColor: '#F5F5F7', padding: '16px', color: '#777', fontSize: '12px' }}>
         <div
           style={{
             maxWidth: 960,
@@ -41,7 +41,7 @@ const Layout = ({ children }) => {
         >
           © {new Date().getFullYear()} Ravi Suresh Mashru. All rights reserved.
         </div>
-      </footer>
+      </footer> */}
     </>
   );
 };
