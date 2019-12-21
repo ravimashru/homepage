@@ -28,7 +28,7 @@ const Layout = ({ children }) => {
       <div style={{ position: 'fixed', top: 0, left: 0, right: 0 }}>
         <Header />
       </div>
-      <main style={{ paddingTop: '98px' }}>
+      <main style={{ paddingTop: '98px', minWidth: '350px' }}>
         {children}
       </main>
       {/* <footer style={{ backgroundColor: '#F5F5F7', padding: '16px', color: '#777', fontSize: '12px' }}>

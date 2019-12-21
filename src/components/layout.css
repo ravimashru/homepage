@@ -54,14 +54,38 @@ header {
 }
 
 .prf-hdr-img {
-  /* margin: 16px; */
   margin: auto;
 }
+
 
 .prf-hdr-social {
   display: flex;
   /* margin-top: 24px; */
 }
+
+@media only screen and (max-width: 600px) {
+  .prf-hdr-ctr {
+    grid-template-columns: 100%;
+    font-size: 24px;
+    margin: 16px;
+    text-align: center;
+  }
+
+  .prf-hdr-intro > div {
+    line-height: 24px;
+    margin-bottom: 16px;
+  }
+
+  .prf-hdr-img {
+    margin: 24px auto;
+  }
+
+  .prf-hdr-social {
+    margin: 16px auto;
+  }
+  
+}
+
 
 .social-icon {
   margin: 0 8px;
