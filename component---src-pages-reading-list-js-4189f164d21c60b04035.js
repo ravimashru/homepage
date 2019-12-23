@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[5],{212:function(e,t,n){"use strict";n.r(t);var a=n(0),l=n.n(a),i=n(27),o=n(209),r=n(208);t.default=function(){return l.a.createElement(o.a,null,l.a.createElement(r.a,{title:"Reading List"}),l.a.createElement("h1",null,"Hi from the reading list"),l.a.createElement("p",null,"Welcome to my reading list"),l.a.createElement(i.Link,{to:"/"},"Go back to the homepage"))}}}]);
+//# sourceMappingURL=component---src-pages-reading-list-js-4189f164d21c60b04035.js.map
