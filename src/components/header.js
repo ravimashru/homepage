@@ -19,7 +19,7 @@ const Header = () => {
       <Link activeClassName="active-header-link" className="header-link" to="/">Home</Link>
       <Link activeClassName="active-header-link" className="header-link" to="/page-2/">Blog</Link>
       <Link activeClassName="active-header-link" className="header-link" to="/reading-list/">Reading List</Link>
-      <a className="header-link" href="https://github.com/mashruravi/notes" target="_blank">Notes</a>
+      <a className="header-link" href="https://github.com/mashruravi/notes" target="_blank" rel="noopener noreferrer">Notes</a>
     </div>
     <div className="hdr-col">
       <div className="hdr-col-menu" onClick={() => {setCollapsed(!collapsed)}}>
@@ -31,7 +31,7 @@ const Header = () => {
           <Link className="header-link-col" to="/">Home</Link>
           <Link className="header-link-col" to="/page-2/">Blog</Link>
           <Link className="header-link-col" to="/reading-list/">Reading List</Link>
-          <a className="header-link-col" href="https://github.com/mashruravi/notes" target="_blank">Notes</a>
+          <a className="header-link-col" href="https://github.com/mashruravi/notes" target="_blank" rel="noopener noreferrer">Notes</a>
         </div>
       </div>
     </div>

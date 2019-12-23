@@ -150,6 +150,47 @@ header {
   border-radius: 10px;
 }
 
+.section-container {
+  margin: 16px 64px;
+  padding: 32px 0;
+}
+
+.section-header {
+  color: #6c6c6c;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 16px auto;
+  max-width: 800px;
+}
+
+.section-body {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.tech-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 16px;
+  width: 180px;
+}
+
+.tech-item > img {
+  height: 60px;
+}
+
+.tech-item > span {
+  color: #6c6c6c;
+  margin: 8px 0;
+}
+
+
 @media only screen and (max-width: 600px) {
   .prf-hdr-ctr {
     grid-template-columns: 100%;
@@ -178,7 +219,43 @@ header {
   .hdr-col {
     display: block;
   }
+
+  .section-container {
+    margin: 32px 8px;
+    padding: 0;
+  }
   
+  .section-header {
+    text-align: center;
+  }
+
+  .tech-item {
+    width: 110px;
+  }
+
+  .tech-item > img {
+    height: 36px;
+  }
+
+  .tech-item > span {
+    text-align: center;
+  }
+  
+}
+
+@media only screen and (min-width: 601px) and (max-width: 900px) {
+  .prf-hdr-ctr {
+    font-size: 26px;
+  }
+
+  .section-container {
+    margin: 32px 16px;
+  }
+
+  .section-header {
+    margin-left: 48px;
+  }
+
 }
 
 
@@ -198,86 +275,6 @@ header {
 
 .sip {
   font-family: 'SocialicoPlus'
-}
-
-
-
-
-
-.homepage-section-grid {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.tech-item-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.tech-item {
-  box-sizing: border-box;
-  padding: 16px 32px;
-  margin: 8px 16px;
-  height: 100px;
-  color: white;
-  display: flex;
-  background-color: black;
-  border-radius: 5px;
-  box-shadow: 2px 2px 7px 3px rgba(0, 0, 0, 0.3);
-}
-
-/* @media only screen and (max-width: 1140px) {
-  .tech-item {
-    font-size: 1.2em;
-  }
-}
-
-@media only screen and (max-width: 930px) {
-  .tech-item {
-    font-size: 1em;
-  }
-} */
-
-@media only screen and (max-width: 450px) {
-  .tech-item {
-    width: 100%;
-  }
-}
-
-.tech-item > span {
-  margin: auto;
-}
-
-.homepage-section {
-  background-color: #f5f5f5;
-  color: black;
-  margin-bottom: 4px;
-}
-
-.homepage-section.inverted {
-  background-color: black;
-  color: white;
-}
-
-.homepage-section.grid {
-  background-color: white;
-  margin-left: 4px;
-  margin-right: 4px;
-}
-
-.homepage-section-wrapper {
-  margin: 0 auto;
-  max-width: 960px;
-  min-width: 300px;
-  text-align: center;
-  padding: 48px;
-}
-
-.social-icon-container {
-  font-size: 64px;
-  display: flex;
-  justify-content: center;;
 }
 
 
