@@ -16,7 +16,7 @@ export default function ProfileHeader() {
       <div></div>
       <div className="prf-hdr-social">
 
-          <div className="social-icon si">
+          <div className="social-icon si si-linkedin">
             <a
               href="https://www.linkedin.com/in/ravi-mashru-4a7ba956/"
               target="_blank"
@@ -24,15 +24,15 @@ export default function ProfileHeader() {
               i
             </a>
           </div>
-          <div className="social-icon si">
+          <div className="social-icon si si-twitter">
             <a href="https://twitter.com/mashruravi" target="_blank">
               l
             </a>
           </div>
-          <div className="social-icon sip">
+          <div className="social-icon sip si-mail">
             <a href="mailto:mashru.ravi@gmail.com">m</a>
           </div>
-          <div className="social-icon sip">
+          <div className="social-icon sip si-github">
             <a href="https://github.com/mashruravi" target="_blank">
               z
             </a>

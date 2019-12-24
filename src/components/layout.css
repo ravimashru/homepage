@@ -267,6 +267,7 @@ header {
 .social-icon > a {
   text-decoration: none;
   color: #6c6c6c;
+  transition: 150ms linear;
 }
 
 .si {
@@ -275,6 +276,22 @@ header {
 
 .sip {
   font-family: 'SocialicoPlus'
+}
+
+.si-linkedin > a:hover {
+  color: #0077B5;
+}
+
+.si-twitter > a:hover {
+  color: #1EA1F2;
+}
+
+.si-mail > a:hover {
+  color: red;
+}
+
+.si-github > a:hover {
+  color: black;
 }
 
 
