@@ -31,17 +31,17 @@ const Layout = ({ children }) => {
       <main style={{ paddingTop: '98px', minWidth: '350px' }}>
         {children}
       </main>
-      {/* <footer style={{ backgroundColor: '#F5F5F7', padding: '16px', color: '#777', fontSize: '12px' }}>
+      <footer style={{ backgroundColor: '#6C6C6C', padding: '48px 16px', color: '#FFF', fontSize: '12px' }}>
         <div
           style={{
-            maxWidth: 960,
+            maxWidth: 950,
             minWidth: 300,
             margin: `0 auto`,
           }}
         >
           © {new Date().getFullYear()} Ravi Suresh Mashru. All rights reserved.
         </div>
-      </footer> */}
+      </footer>
     </>
   );
 };
