@@ -201,6 +201,14 @@ header {
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+
+  cursor: pointer;
+  transition: box-shadow 200ms ease-out;
+}
+
+.proj-item:hover {
+  box-shadow: 0 0 16px 0px rgba(0, 0, 0, 0.2),
+              0 0 50px 0px rgba(0, 0, 0, 0.09);
 }
 
 .proj-item-title {
