@@ -1,5 +1,4 @@
 module.exports = {
-  pathPrefix: '/homepage',
   siteMetadata: {
     title: `Ravi Mashru`,
     description: `Ravi Mashru's home page on the internet - personal portfolio, blog and notes.`,
@@ -21,7 +20,6 @@ module.exports = {
       options: {
         name: `Ravi Mashru's Home Page`,
         short_name: `Ravi Mashru`,
-        start_url: `/homepage`,
         background_color: `#323232`,
         theme_color: `#323232`,
         display: `standalone`,
