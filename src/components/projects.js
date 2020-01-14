@@ -38,7 +38,7 @@ export default function Projects() {
       description:
         'A multi-class classifier for images in the Tiny ImageNet dataset.',
       tags: ['dl', 'cv'],
-      url: 'https://github.com/mashruravi/clf-tiny-imagenet',
+      url: 'https://github.com/mashruravi/clf-tiny-imagenet/blob/master/A4_20.ipynb',
     },
     {
       title: 'Cellular Automata',
