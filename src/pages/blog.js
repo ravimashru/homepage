@@ -1,20 +1,19 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import * as moment from 'moment';
+import { graphql } from 'gatsby';
 
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 
 const formatDate = d => {
-  return moment(d).format("MMMM D, YYYY");
+  return moment(d).format('MMMM D, YYYY');
 };
 
 const Blog = ({ data: { allMdx } }) => (
   <Layout>
     <SEO title="Blog" />
-    <h1 className="blog-header">
-      Blog Posts
-    </h1>
+    <h1 className="blog-header">Blog Posts</h1>
 
     <div className="blog-list">
       {allMdx.edges.map(({ node }) => {
