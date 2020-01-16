@@ -12,7 +12,7 @@ import Header from './header';
 import './layout.css';
 
 const Layout = ({ children }) => {
-  const maxPageWidth = 900;
+  const maxPageWidth = 1100;
 
   return (
     <>

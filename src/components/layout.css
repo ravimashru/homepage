@@ -25,6 +25,7 @@ header {
   align-items: center;
   padding: 0 16px;
   background-color: rgba(255, 255, 255, 0.95);
+  /* box-shadow: 0px 3px 7px 0px rgba(0, 0, 0, 0.05); */
 }
 
 .hdr-normal {
@@ -305,6 +306,25 @@ footer {
   color: #4c4c4c;
 }
 
+.blog-content {
+  padding: 0 16px;
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+.blog-content h1 {
+  color: #6c6c6c;
+}
+
+.blog-body {
+  margin-bottom: 36px;
+  text-align: justify;
+}
+
+.blog-body p {
+  line-height: 30px;
+}
+
 @media only screen and (max-width: 600px) {
   .prf-hdr-ctr {
     grid-template-columns: 100%;
@@ -381,8 +401,12 @@ footer {
   }
 
   .blog-header {
-    padding: 0 16px;
     text-align: left;
+    padding: 0 16px;
+  }
+
+  .blog-content h1 {
+    text-align: center;
   }
   
 }
