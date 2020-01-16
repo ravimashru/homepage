@@ -79,8 +79,8 @@ export default function Projects() {
               <div className="proj-item-desc">{e.description}</div>
               <div className="proj-item-spacer"></div>
               <div className="proj-item-tags">
-                {e.tags.map(e => (
-                  <div className={`proj-item-tags-itm tag-${e}`}>{tags[e]}</div>
+                {e.tags.map(t => (
+                  <div key={t} className={`proj-item-tags-itm tag-${t}`}>{tags[t]}</div>
                 ))}
               </div>
             </div>

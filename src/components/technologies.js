@@ -73,7 +73,7 @@ export default function Technologies() {
         {technologies.map(e => {
           return (
             <div key={e.name} className="tech-item">
-              <img src={e.image} />
+              <img src={e.image} alt={e.name}/>
               <span>{e.label}</span>
             </div>
           );
