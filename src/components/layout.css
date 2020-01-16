@@ -88,28 +88,24 @@ header {
 
 .hdr-col-menu-bar-1 {
   top: 14px;
-  transition: top 250ms 150ms ease-out,
-              transform 150ms ease-out;
+  transition: top 250ms 150ms ease-out, transform 150ms ease-out;
 }
 
 .hdr-col-menu-bar-2 {
   bottom: 14px;
-  transition: bottom 250ms 150ms ease-out,
-              transform 150ms ease-out;
+  transition: bottom 250ms 150ms ease-out, transform 150ms ease-out;
 }
 
 .hdr-col-menu-bar-1-open {
   top: 19px;
   transform: rotate(45deg);
-  transition: top 150ms ease-out,
-              transform 250ms 150ms ease-out;
+  transition: top 150ms ease-out, transform 250ms 150ms ease-out;
 }
 
 .hdr-col-menu-bar-2-open {
   bottom: 19px;
   transform: rotate(-45deg);
-  transition: bottom 150ms ease-out,
-              transform 250ms 150ms ease-out;
+  transition: bottom 150ms ease-out, transform 250ms 150ms ease-out;
 }
 
 .hdr-col-itm-ctr {
@@ -194,8 +190,7 @@ header {
 .proj-item {
   width: 260px;
   height: 300px;
-  box-shadow: 0 0 8px 0px rgba(0, 0, 0, 0.2),
-              0 0 50px 0px rgba(0, 0, 0, 0.09);
+  box-shadow: 0 0 8px 0px rgba(0, 0, 0, 0.2), 0 0 50px 0px rgba(0, 0, 0, 0.09);
   margin: 32px;
   padding: 16px;
   color: #6c6c6c;
@@ -208,8 +203,7 @@ header {
 }
 
 .proj-item:hover {
-  box-shadow: 0 0 16px 0px rgba(0, 0, 0, 0.2),
-              0 0 50px 0px rgba(0, 0, 0, 0.09);
+  box-shadow: 0 0 16px 0px rgba(0, 0, 0, 0.2), 0 0 50px 0px rgba(0, 0, 0, 0.09);
 }
 
 .proj-item-title {
@@ -240,27 +234,27 @@ header {
 }
 
 .tag-datascience {
-  background-color: #FF6060;
+  background-color: #ff6060;
 }
 
 .tag-webdev {
-  background-color: #209D21;
+  background-color: #209d21;
 }
 
 .tag-educ {
-  background-color: #FF9628;
+  background-color: #ff9628;
 }
 
 .tag-ai {
-  background-color: #20259D;
+  background-color: #20259d;
 }
 
 .tag-dl {
-  background-color: #A907C4;
+  background-color: #a907c4;
 }
 
 .tag-cv {
-  background-color: #A8A600;
+  background-color: #a8a600;
 }
 
 footer {
@@ -310,6 +304,14 @@ footer {
   padding: 0 16px;
   max-width: 750px;
   margin: 0 auto;
+  line-height: 1.5;
+  font-family: -apple-system, 'BlinkMacSystemFont', 'Roboto', 'Helvetica Neue',
+    'Arial', sans-serif;
+}
+
+.blog-content blockquote {
+  background: rgba(0, 0, 0, 0.03);
+  padding: 8px 32px;
 }
 
 .blog-content h1 {
@@ -319,10 +321,6 @@ footer {
 .blog-body {
   margin-bottom: 36px;
   text-align: justify;
-}
-
-.blog-body p {
-  line-height: 30px;
 }
 
 @media only screen and (max-width: 600px) {
@@ -349,7 +347,7 @@ footer {
   .hdr-normal {
     display: none;
   }
-  
+
   .hdr-col {
     display: block;
   }
@@ -358,7 +356,7 @@ footer {
     margin: 64px 8px;
     padding: 0;
   }
-  
+
   .section-header {
     text-align: center;
   }
@@ -380,17 +378,17 @@ footer {
     height: 260px;
     margin: 24px;
   }
-  
+
   .proj-item-title {
     font-size: 22px;
     margin: 24px 0;
     text-align: center;
   }
-  
+
   .proj-item-desc {
     font-size: 14px;
   }
-  
+
   .proj-item-tags-itm {
     font-size: 10px;
     padding: 4px 8px;
@@ -408,7 +406,6 @@ footer {
   .blog-content h1 {
     text-align: center;
   }
-  
 }
 
 @media only screen and (min-width: 601px) and (max-width: 900px) {
@@ -429,17 +426,17 @@ footer {
     height: 260px;
     margin: 24px;
   }
-  
+
   .proj-item-title {
     font-size: 22px;
     margin: 24px 0;
     text-align: center;
   }
-  
+
   .proj-item-desc {
     font-size: 14px;
   }
-  
+
   .proj-item-tags-itm {
     font-size: 10px;
     padding: 4px 8px;
@@ -452,9 +449,7 @@ footer {
   .blog-header {
     text-align: center;
   }
-
 }
-
 
 .social-icon {
   margin: 0 8px;
@@ -468,19 +463,19 @@ footer {
 }
 
 .si {
-  font-family: 'Socialico'
+  font-family: 'Socialico';
 }
 
 .sip {
-  font-family: 'SocialicoPlus'
+  font-family: 'SocialicoPlus';
 }
 
 .si-linkedin > a:hover {
-  color: #0077B5;
+  color: #0077b5;
 }
 
 .si-twitter > a:hover {
-  color: #1EA1F2;
+  color: #1ea1f2;
 }
 
 .si-mail > a:hover {
@@ -490,7 +485,6 @@ footer {
 .si-github > a:hover {
   color: black;
 }
-
 
 /* html {
   font-family: sans-serif;
