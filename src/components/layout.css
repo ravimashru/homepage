@@ -276,28 +276,29 @@ footer {
 .blog-list-item {
   display: flex;
   flex-direction: column;
-  margin: 36px 0;
-}
-
-.blog-list-item a {
+  margin: 24px 0;
+  padding: 16px;
   color: #6c6c6c;
   text-decoration: none;
 
-  transition: color 150ms linear;
+  transition: color 150ms linear,
+              border 150ms linear;
   font-size: 18px;
+  box-sizing: border-box;
+  border: 1px solid rgba(0, 0, 0, 0);
 
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.blog-list-item span {
-  color: #6c6c6c;
+.blog-list-item span:nth-child(2) {
   font-size: 12px;
 }
 
-.blog-list-item a:hover {
-  color: #4c4c4c;
+.blog-list-item:hover {
+  color: #0c0c0c;
+  border: 1px solid rgba(0, 0, 0, 0.3)
 }
 
 .blog-content {

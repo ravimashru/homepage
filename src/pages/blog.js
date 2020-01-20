@@ -18,10 +18,10 @@ const Blog = ({ data: { allMdx } }) => (
     <div className="blog-list">
       {allMdx.edges.map(({ node }) => {
         return (
-          <div className="blog-list-item" key={node.id}>
-            <Link to={node.fields.slug}>{node.frontmatter.title}</Link>
+          <Link to={node.fields.slug} className="blog-list-item" key={node.id}>
+            <span>{node.frontmatter.title}</span>
             <span>{formatDate(node.frontmatter.date)}</span>
-          </div>
+          </Link>
         );
       })}
     </div>
