@@ -27,9 +27,9 @@ The content of the popover has to be in HTML:
         data-toggle="popover"
         data-placement="bottom"
         data-html=true
-        data-content="<p>This is a <a href='#' (click)='openDialog()'>link</a> you need to click</p>">
+        data-content="<p>Click<a href='#' (click)='openDialog()'>here</a>...</p>">
 
-  Popover on top
+  Click to open
 
 </button>
 ```
@@ -44,12 +44,61 @@ data-content =
 Similarly, we can call a function that would handle the click event. This click handler needs to be accessible to the popover content in the global execution context.
 
 
-To do this, we first make the following changes in the component:....
+To do this, we first make the following changes in the component:
 
+**Create a namespace for the functions we will create**
 
+```
+declare global {
+  interface Window { MyCustomNamespace: any; }
+}
+
+window.MyCustomNamespace = window.MyCustomNamespace || {};
+```
+
+**Inject NgZone**
+
+The function that will be run from the global execution context will be running outside Angular's zone. We need to hook back into the zone in the code we write.
+
+```
+import { NgZone } from '@angular/core';
+
+...
+
+constructor( private zone: NgZone ){}
+```
+
+**Use a function in the created namespace as a click handler**
+
+```
+<button type="button"
+        class="btn btn-primary"
+        data-container="body"
+        data-toggle="popover"
+        data-placement="bottom"
+        data-html=true
+        data-content="<p>Click <a href='#' onclick='MyCustomNamespace.openDialog()'>here</a>...</p>">
+
+  Click to open
+
+</button>
+```
+
+**Define the function used as a click handler**
+
+```
+window.ExternalPlannedNamespace.openDialog = () => {
+  // Since this function runs outside Angular's zone, we need to get back inside!
+  this.zone.run(() => {
+    // Put angular code that has to be called on click on the link in the popover here...
+  });
+}
+```
 
 Of course this entire problem could have been avoided by not dropping the popover library into an Angular application in the first place. Using a wrapper like [ngx-bootstrap](https://www.npmjs.com/package/ngx-bootstrap) would have been a better option.
 
-However, this is an interesting hack to have in your toolbox if you ever want to hook back into an Angular context from “regular” JavaScript.
+However, this is an interesting hack to have in your toolbox if you ever want to hook back into an Angular context from “regular” JavaScript (especially when working with legacy codebases).
 
-(Reference: [https://stackoverflow.com/questions/12709074/how-do-you-explicitly-set-a-new-property-on-window-in-typescript](https://stackoverflow.com/questions/12709074/how-do-you-explicitly-set-a-new-property-on-window-in-typescript))
+---
+
+Reference: [StackOverflow](https://stackoverflow.com/questions/12709074/how-do-you-explicitly-set-a-new-property-on-window-in-typescript)
