@@ -3,12 +3,16 @@ title: Calling Angular Component Functions from JavaScript
 date: 2020-02-23
 ---
 
+import angularJsUrl from '../images/angular_js.png';
+
 I recently had to work on an Angular application that used the [Bootstrap library to show a popover](https://getbootstrap.com/docs/4.3/components/popovers/). The popover content needed to have a link that would open up a dialog (using the Dialog component from Angular’s Material library) when clicked.
 
 Putting the weird requirement aside for a moment, this kind of interaction posed a unique technical challenge. There were two things that needed to be done:
 
 1. There would be a button on the UI. Clicking this button would open a popover with a link.
 2. Clicking on the link in the popover would open a dialog.
+
+<img src={angularJsUrl} alt="angular and javascript" width="100%" />
 
 The first part is very straight forward. Create a button and initialise the popover on it. This can be done in the `ngAfterViewInit` lifecycle hook:
 
@@ -18,7 +22,7 @@ public ngAfterViewInit(): void {
 }
 ```
 
-The content of the popover has to be in HTML:
+For the second part, the content of the popover has to be in HTML:
 
 ```
 <button type="button"
