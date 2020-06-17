@@ -20,6 +20,13 @@ module.exports = {
         path: `${__dirname}/content/posts/`,
       }
     },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `post-images`,
+        path: `${__dirname}/content/images/`,
+      }
+    },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
