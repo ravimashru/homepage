@@ -20,8 +20,8 @@ const Image = (props) => {
           nodes {
             relativePath
             childImageSharp {
-              fluid(maxWidth: 1200) {
-                ...GatsbyImageSharpFluid
+              fixed(width: 600) {
+                ...GatsbyImageSharpFixed
               }
             }
         }
@@ -31,7 +31,7 @@ const Image = (props) => {
 
   const match = data.allFile.nodes.find(e => e.relativePath === props.name);
 
-  return <Img fluid={match.childImageSharp.fluid} />
+  return <Img fixed={match.childImageSharp.fixed} style={{ display: 'block', width: '100%'}} imgStyle={{ margin: '0 auto', objectFit: 'contain' }}/>
 }
 
 export default Image
