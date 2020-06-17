@@ -3,20 +3,20 @@ title: Calling Angular Component Functions from JavaScript
 date: 2020-02-23
 ---
 
-import angularJsUrl from '../images/angular_js.png';
+import Image from '../../src/components/image';
 
-I recently had to work on an Angular application that used the [Bootstrap library to show a popover](https://getbootstrap.com/docs/4.3/components/popovers/). The popover content needed to have a link that would open up a dialog (using the Dialog component from Angular’s Material library) when clicked.
+I recently had to work on an Angular application that used the [Bootstrap library to show a popover](https://getbootstrap.com/docs/4.3/components/popovers/). The popover content needed to have a link that would open up a dialog (using the Dialog component from Angular’s Material library) when clicked.
 
 Putting the weird requirement aside for a moment, this kind of interaction posed a unique technical challenge. There were two things that needed to be done:
 
-1. There would be a button on the UI. Clicking this button would open a popover with a link.
-2. Clicking on the link in the popover would open a dialog.
+- There would be a button on the UI. Clicking this button would open a popover with a link.
+- Clicking on the link in the popover would open a dialog.
 
-<img src={angularJsUrl} alt="angular and javascript" width="100%" />
+<Image name="angular_js.png"/>
 
-The first part is very straight forward. Create a button and initialise the popover on it. This can be done in the `ngAfterViewInit` lifecycle hook:
+The first part is very straight forward. Create a button and initialise the popover on it. This can be done in the `ngAfterViewInit` lifecycle hook:
 
-```
+```tsx
 public ngAfterViewInit(): void {
   $('[data-toggle="popover"]').popover();
 }
@@ -24,7 +24,7 @@ public ngAfterViewInit(): void {
 
 For the second part, the content of the popover has to be in HTML:
 
-```
+```html
 <button type="button"
         class="btn btn-primary"
         data-container="body"
@@ -40,19 +40,17 @@ For the second part, the content of the popover has to be in HTML:
 
 This doesn't work because the click handler that we attached was interpreted as a string and it doesn’t actually trigger anything on click. This is because we can only call “normal” JavaScript functions from the popover. For example, the following alert would work:
 
-```
-data-content =
-  `<p>This is a <a href='#' onclick="alert('Thanks for clicking...')">link</a> you need to click</p>`
+```html
+data-content = `<p>This is a <a href='#' onclick="alert('Thanks for clicking...')">link</a> you need to click</p>`
 ```
 
 Similarly, we can call a function that would handle the click event. This click handler needs to be accessible to the popover content in the global execution context.
 
-
 To do this, we first make the following changes in the component:
 
-**Create a namespace for the functions we will create**
+1. **Create a namespace for the functions we will create**
 
-```
+```tsx
 declare global {
   interface Window { MyCustomNamespace: any; }
 }
@@ -60,11 +58,11 @@ declare global {
 window.MyCustomNamespace = window.MyCustomNamespace || {};
 ```
 
-**Inject NgZone**
+2. **Inject NgZone**
 
 The function that will be run from the global execution context will be running outside Angular's zone. We need to hook back into the zone in the code we write.
 
-```
+```tsx
 import { NgZone } from '@angular/core';
 
 ...
@@ -72,9 +70,9 @@ import { NgZone } from '@angular/core';
 constructor( private zone: NgZone ){}
 ```
 
-**Use a function in the created namespace as a click handler**
+3. **Use a function in the created namespace as a click handler**
 
-```
+```html
 <button type="button"
         class="btn btn-primary"
         data-container="body"
@@ -88,9 +86,9 @@ constructor( private zone: NgZone ){}
 </button>
 ```
 
-**Define the function used as a click handler**
+4. **Define the function used as a click handler**
 
-```
+```tsx
 window.ExternalPlannedNamespace.openDialog = () => {
   // Since this function runs outside Angular's zone, we need to get back inside!
   this.zone.run(() => {
@@ -99,10 +97,8 @@ window.ExternalPlannedNamespace.openDialog = () => {
 }
 ```
 
-Of course this entire problem could have been avoided by not dropping the popover library into an Angular application in the first place. Using a wrapper like [ngx-bootstrap](https://www.npmjs.com/package/ngx-bootstrap) would have been a better option.
+Of course this entire problem could have been avoided by not dropping the popover library into an Angular application in the first place. Using a wrapper like [ngx-bootstrap](https://www.npmjs.com/package/ngx-bootstrap) would have been a better option.
 
 However, this is an interesting hack to have in your toolbox if you ever want to hook back into an Angular context from “regular” JavaScript (especially when working with legacy codebases).
 
----
-
-Reference: [StackOverflow](https://stackoverflow.com/questions/12709074/how-do-you-explicitly-set-a-new-property-on-window-in-typescript)
+Reference: [StackOverflow](https://stackoverflow.com/questions/12709074/how-do-you-explicitly-set-a-new-property-on-window-in-typescript)
