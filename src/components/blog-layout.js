@@ -3,15 +3,25 @@ import Layout from '../components/layout';
 import SEO from './seo';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { graphql } from 'gatsby';
+import { MDXProvider } from '@mdx-js/react'
+import CodeBlock from './code-block'
 
 export default function BlogLayout({ data: { mdx } }) {
+
+const components = {
+  pre: props => <div {...props} />,
+  code: props => <CodeBlock {...props} />
+}
+
   return (
     <Layout>
       <SEO title={`${mdx.frontmatter.title} - Blog`} />
       <div className="blog-content">
         <h1>{mdx.frontmatter.title}</h1>
         <div className="blog-body">
-          <MDXRenderer>{mdx.body}</MDXRenderer>
+          <MDXProvider components={components}>
+            <main><MDXRenderer>{mdx.body}</MDXRenderer></main>
+          </MDXProvider>
         </div>
       </div>
     </Layout>
