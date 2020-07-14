@@ -33,7 +33,7 @@ export default function ProfileHeader() {
         </div>
         <div className="social-icon si si-twitter">
           <a
-            href="https://twitter.com/mashruravi"
+            href="https://twitter.com/ravimashru"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -41,7 +41,7 @@ export default function ProfileHeader() {
           </a>
         </div>
         <div className="social-icon sip si-mail">
-          <a href="mailto:mashru.ravi@gmail.com">m</a>
+          <a href="mailto:me@ravimashru.dev">m</a>
         </div>
         <div className="social-icon sip si-github">
           <a
