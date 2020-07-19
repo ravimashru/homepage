@@ -1,0 +1,109 @@
+---
+title: Mass Delete Messages on Slack
+date: 2020-07-19
+---
+
+import Image from '../../src/components/image';
+
+My team had a channel on Slack that was rarely used. There was just a Twitter Slack app that would post tweets made by our company's official Twitter account.
+We wanted to bring that channel back to life, and also get rid of all the tweets. Removing the Twitter app from the channel was easy, but there was no way to get rid of all the messages it had posted.
+The app had been posting multiple tweets a day for almost 2 years, so manually deleting each message was not feasible. Deleting the channel and creating it again with the same name was not an option either - we didn't want to invite all the members again and lose all the messages other members had posted before the Twitter app took over!
+
+I started looking for utilities that would help me delete all posts made by the Twitter app. I tried chrome extensions and command line utilities. Unfortunately, none of them worked. So I decided to use the Slack API to delete the messages using a script.
+
+To use the Slack API, I had to create a Slack App and install it in my workspace. However, since we are on a Slack enterprise grid, an app manager first has to approve my app before I can install it and use it to delete messages. Usually, I am a very patient person. But this time, I did not feel like waiting for an arbitrary amount of time for an approval.
+
+After playing around with Slack for some time in the browser, I noticed that you can use the cookie and the token to authenticate yourself using the API.
+You can get these values by looking at the details of an authenticated call in the Network tab in Chrome's DevTools.
+
+<Image name="slack_auth.png" />
+
+I wrote the following code to fetch all the messages in the channel, and delete those that were posted by the Twitter app. Since the Slack API returns pages of results, I had to handle getting the next page of results as well.
+
+```typescript
+// slack-cleaner.ts
+
+const HISTORY_ENDPOINT = 'https://<workspace-name>.slack.com/api/conversations.history';
+const DELETE_ENDPOINT = 'https://<workspace-name>.slack.com/api/chat.delete';
+
+const COOKIE = Deno.env.get('COOKIE') || '';
+const TOKEN = Deno.env.get('TOKEN') || '';
+
+const CHANNEL = '<channel-id>';
+
+const TWITTER_BOT_ID = '<slack-app-id>';
+
+const payload = new FormData();
+payload.set('token', TOKEN);
+payload.set('channel', CHANNEL);
+
+// Keep track of cursor to fetch next page of results
+let next_cursor = '';
+
+const runDeleteLoop = async () => {
+  payload.set('cusor', next_cursor);
+  const res = await fetch(HISTORY_ENDPOINT, {
+    method: 'POST',
+    body: payload,
+    headers: {
+      Cookie: COOKIE,
+    },
+  });
+
+  const resJson = await res.json();
+  const messages = resJson.messages;
+  next_cursor = resJson.response_metadata?.next_cursor;
+  const messagesFromTwitterBot = messages.filter(
+    (message: any) =>
+      message.bot_id === TWITTER_BOT_ID && message.subtype === 'bot_message'
+  );
+
+  console.log(`Total messages: ${messages.length}`);
+  console.log(`Twitter bot messages: ${messagesFromTwitterBot.length}`);
+
+  const interval = setInterval(async () => {
+    if (messagesFromTwitterBot.length === 0) {
+      clearInterval(interval);
+      if (next_cursor !== '') {
+        console.log(`Starting next page...`);
+        await runDeleteLoop();
+      } else {
+        console.log(`Cleanup completed!`);
+      }
+      return;
+    }
+    const message = messagesFromTwitterBot.shift();
+    payload.set('ts', message.ts);
+    const res = await fetch(DELETE_ENDPOINT, {
+      method: 'POST',
+      body: payload,
+      headers: {
+        Cookie: COOKIE,
+      },
+    });
+    console.log(res.status, res.statusText);
+  }, 1000); // The delete endpoint has a Tier 3 rate limit. Approx. 1 request per second ensures we don't hit the rate limit
+};
+
+await runDeleteLoop();
+```
+
+This can then be run using `Deno` after setting the COOKIE and TOKEN environment variables as follows:
+
+```shell
+$ deno run --allow-net --allow-env slack-cleaner.ts
+```
+
+If you have not provided the cookie and token correctly, the API will return something like this:
+
+```json
+{
+  "ok": false,
+  "error": "not_authed"
+}
+```
+
+Life would be much easier if Slack provided a feature to mass delete messages from a channel, at least for:
+
+- Messages you have posted.
+- Messages posted by a Slack App.
