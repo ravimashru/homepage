@@ -45,7 +45,7 @@ export default function ProfileHeader() {
         </div>
         <div className="social-icon sip si-github">
           <a
-            href="https://github.com/mashruravi"
+            href="https://github.com/ravimashru"
             target="_blank"
             rel="noopener noreferrer"
           >
