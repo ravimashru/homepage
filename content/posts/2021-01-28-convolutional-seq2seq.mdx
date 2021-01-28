@@ -1,0 +1,57 @@
+---
+title: Convolutional Sequence-to-sequence Networks
+date: 2021-01-28
+---
+
+Convolutional Neural Networks (CNNs) are most commonly applied to problems that deal with images and video. CNNs mimic the way the human visual system works. However, CNNs have also been successfully applied in NLP.
+
+# Sequence-to-sequence Models
+
+A sequence-to-sequence model has two parts: an encoder and a decoder. The encoder receives the input to the network and converts it into an embedding (a.k.a the context vector). This embedding is then passed to the decoder which generates the required target. In convolutional sequence-to-sequence networks, the encoder and decoder and built with convolution layers instead of recurrent ones like LSTMs and GRUs. Instead of 2-dimensional convolutions used with images, we use 1-dimensional convolutions.
+
+Sequence-to-sequence models are widely used for tasks like Question Answering, Machine Translation and even Sentiment Analysis.
+
+# Fixed Maximum Input Length
+
+Compared to "normal" Seq2seq networks, convolutional ones need to have a fixed maximum input length.
+
+In seq2seq networks built with recurrent components, tokens are processed in the order in which they appear in a sequence.
+
+However, convolutional networks have no idea about the order of tokens in a sequence. As a result, the input to the network is the sum of two embeddings: the embedding of the token, and the embedding of the position of the token in the sequence.
+
+For the embedding layer of the token position, we need to define the input dimensionality - the maximum number that a position can have. As a result, we are bound to sequences with a pre-defined maximum length when we use convolutional seq2seq networks.
+
+# Building the Network
+
+## The Encoder
+
+The input to the encoder is a batch of sequences. Each sequence is made up of tokens. Since every sequence may have a different length, they are all padded with a **padding token** so that every sequence has the same length as the longest sequence in the batch.
+
+This input goes through an embedding layer to convert each token into an embedding. The position of each token is also passed through a separate embedding layer to generate an embedding of the position of each token (see the **Fixed Maximum Input Length** section above for why we need this).
+
+The input and position embeddings are then added and passed through a linear layer which converts the dimensions of the vectors to a size required by the block of convolutional layers that come next.
+
+A convolutional block consists of the following: padding the input on either side to preserve the length of the sequence after the convolution operation, using a convolutional layer that has twice the input hidden dimension as the output hidden dimensions, and finally passing this through a GLU (gated linear unit) activation that halve the hidden dimension and make it equal to the input hidden dimension again.
+
+There can be several such convolutional blocks, each having parameters that are independent from the other blocks. The output of a previous convolutional block is used as input for the next convolutional block.
+
+The output of the final convolutional block is passed through a linear layer to get the **conved output**. This is also added to the embedding of the token to get the **combined output**. There are two of these outputs from the encoder for each token in the sequence fed to the encoder.
+
+## The Decoder
+
+The decoder takes the entire target sequence, and generates an embedding for the tokens and their position and sums these embeddings elementwise, just like in the encoder.
+
+These elemntwise-summed embeddings then go through a linear layer to convert the vectors into a size required by the convolutional blocks to which they are fed next.
+
+In the convolutional blocks in the decoder, the embeddings are padded only at the beginning with two tokens. This is done to ensure the convolutional layer doesn't see the token that it supposed to predict. Also, the `<eos>` token is removed from the end of the sequence since it doesn't need to be sent to the decoder. Just like in the encoder, after the convolutional layer a GLU activation is applied.
+
+The output of the GLU activation layer is then fed to the attention layer that also uses: the **conved** and **combined** outputs from the encoder and the elementwise-summed embedding of each token to calculate the attention.
+
+The output of this layer is passed through two more linear layers that eventually changes the dimension of the vectors to the required output dimension.
+
+The major difference between this decoder and the decoder of a seq2seq model based on a recurrent network is that this one doesn't have a decoding loop. This is because the convolutional layers do decoding in parallel instead of one token at a time.
+
+# The Code
+
+You can find the complete code described in this post in [this notebook](https://github.com/bentrevett/pytorch-seq2seq/blob/master/5%20-%20Convolutional%20Sequence%20to%20Sequence%20Learning.ipynb) by [@bentrevett](https://github.com/bentrevett). There are a lot of other amazing tutorials in his GitHub repositories. Be sure to check them out!
+
