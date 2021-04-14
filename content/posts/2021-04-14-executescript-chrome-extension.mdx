@@ -1,0 +1,112 @@
+---
+title: Changes in the `executeScript` method for Chrome extensions
+date: 2021-04-14
+---
+
+My team does virtual sprint retrospectives on [EasyRetro](https://easyretro.io/) and I created a [Chrome extension](https://chrome.google.com/webstore/detail/easyretro-to-excel-conver/neoomajkccfdhhbffeobjiflainanfgh) to download everything we write into a spreadsheet.
+
+A few weeks back, the extension stopped working with the error `chrome.tabs.executeScript is not a function`. Unfortunately, I couldn't figure out why a function that was working perfectly well suddenly stopped working. So I downgraded the extension to use [manifest v2](https://developer.chrome.com/docs/extensions/mv2/) from [manifest v3](https://developer.chrome.com/docs/extensions/mv3/intro/) which was still working fine.
+
+Today, I decided to look into the issue again and found [this](https://stackoverflow.com/a/66550386/5774633) answer on StackOverflow:
+
+> The `executeScript` method in ManifestV3 has changed and is now in `chrome.scripting` API: [https://developer.chrome.com/docs/extensions/reference/scripting/](https://developer.chrome.com/docs/extensions/reference/scripting/)Add this line in manifest.json:
+>
+> `"permissions": ["scripting"]` 
+>
+> background.js
+>
+> `chrome.scripting.executeScript({
+>    target: {tabId: id, allFrames: true},
+>    files: ['content_scripts/cscript.js'],
+> });`
+
+All the required information is also available in the [official API reference for `chrome.scripting`](https://developer.chrome.com/docs/extensions/reference/scripting/).
+
+# Changes in API
+
+The change wasn't as simple as just adding the extra permission in the manifest and replacing `chrome.tabs` with `chrome.scripting`. There were a few more minor adjustments that had to be made in the code.
+
+## Change in parameters
+
+This change was relatively simple. The previous method took three arguments: the tab ID, the code/file to execute and a callback that would be called with the results. The new method took only two arguments: the first was an object that contained the tab ID and the code/file to execute and the second was a callback function that would be called with the results.
+
+**Before**
+
+```javascript
+chrome.tabs.executeScript(tabId, { code: `...` }, (res) => { ... });
+```
+
+**After**
+
+```javascript
+chrome.scripting.executeScript(
+	{
+		target: { tabId: ... },
+		function: ...
+	},
+	(res) => { ... )
+);
+```
+
+## No strings allowed
+
+With `chrome.tabs.executeScript` it was possible to execute a string on JavaScript, and this is exactly what I was doing - passing the code I wanted to execute on the page as a string.
+
+In `chrome.scripting.executeScript` you can only pass a function or the name of a `.js` with the code you want to execute.
+
+Since the code I wanted to execute on the web page was already in the form of a function in a multiline string, I found it easier to convert the string to an actual function and pass it to the `executeScript` method.
+
+**Before**
+
+```javascript
+chrome.tabs.executeScript(tabId, { code: `...` }, (res) => { ... });
+```
+
+**After**
+
+```javascript
+const functionToExecute = () => { ... };
+
+chrome.scripting.executeScript(
+	{
+		target: { tabId: ... },
+		function: functionToExecute
+	},
+	(res) => { ... )
+);
+```
+
+## Returning data from contentscript
+
+When passing a string with JavaScript code to execute on the page, the last statement in the string would be the name of the variable that you would like to return.
+
+With the new method, since we pass an actual function or a `.js` file, we have to explicitly use a return statement to send a value to the callback.
+
+Also, the callback now contains an array of objects with the result in the `result` property of each object.
+
+**Before**
+
+```javascript
+chrome.tabs.executeScript(
+	tabId,
+	{ code: `const a = 2 * 4; a` },
+	(res) => { /* res contains array with value '8' */ }
+);
+```
+
+**After**
+
+```javascript
+const functionToExecute = () => {
+	const a = 2 * 4;
+	return a;
+};
+
+chrome.scripting.executeScript(
+	{
+		target: { tabId: ... },
+		function: functionToExecute
+	},
+	(res) => { /* res contains array with value { result: 8 } */ )
+);
+```
