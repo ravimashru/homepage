@@ -1,0 +1,144 @@
+---
+title: Functional Programming in Java with Functional Interfaces, Anonymous Classes and Lambda Expressions
+date: 2021-04-18
+---
+
+Functional programming requires the use of, well... functions. Methods in Java can play the role of a function is they are **pure** - they have no side effects, and they always return the same value when called with the same arguments.
+
+However, using methods this way doesn't allow for composition of functions which requires passing a function as a parameter to another function. Functional interfaces allow for the composition of function.
+
+Technically, functional interfaces are interfaces with one abstract method.
+
+```java
+public interface Function<T, R> {
+
+	R apply(T t);
+
+}
+```
+_An example of an inbuilt functional interface `Function` with an abstract method `apply` from `java.util.function`._
+
+
+Let's say we have an array of integers 1 to 5. We want to:
+
+1. Square each integer
+2. Remove the odd results
+3. Find the sum of the remaining numbers
+
+This can be done using the functional programming paradigm by composing functions that do each of those things as follows:
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Function;
+
+public class FunctionalInterfacesDemo {
+
+	public static void main(String[] args) {
+
+		List<Integer> numbers = new ArrayList<Integer>(List.of(1, 2, 3, 4, 5));
+
+		Function<List<Integer>, List<Integer>> square = new Function<List<Integer>, List<Integer>>() {
+
+			@Override
+			public List<Integer> apply(List<Integer> arr) {
+				List<Integer> res = new ArrayList<Integer>();
+				for (Integer i : arr) {
+					res.add(i * i);
+				}
+				return res;
+			}
+
+		};
+
+		Function<List<Integer>, List<Integer>> keepEven = new Function<List<Integer>, List<Integer>>() {
+
+			@Override
+			public List<Integer> apply(List<Integer> arr) {
+				List<Integer> res = new ArrayList<Integer>();
+				for (Integer i : arr) {
+					if (i % 2 == 0) {
+						res.add(i);
+					}
+				}
+				return res;
+			}
+
+		};
+
+		Function<List<Integer>, Integer> sum = new Function<List<Integer>, Integer>() {
+
+			@Override
+			public Integer apply(List<Integer> arr) {
+				Integer res = 0;
+				for (Integer i : arr) {
+					res += i;
+				}
+				return res;
+			}
+
+		};
+
+		Function<List<Integer>, Integer> squareKeepEvenSum = sum.compose(keepEven).compose(square);
+
+		System.out.println(squareKeepEvenSum.apply(numbers));
+		// Output: 20
+
+	}
+
+}
+```
+
+Notice that the `square`, `keepEven` and `sum` objects are of the class defined inline on the right-hand side of the assignment. Since the class doesn't have a name, it is called an **anonymous class**.
+
+Creating an object of an anonymous class this way can reduce the time and effort required to create classes that implement functional interfaces in a separate file and then create objects of them.
+
+**Lambdas** make it even less verbose to implement functional interfaces. We can redo the above example using lambdas instead of anonymous classes as follows:
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Function;
+
+public class FunctionalInterfacesLambdaDemo {
+
+	public static void main(String[] args) {
+		List<Integer> numbers = new ArrayList<Integer>(List.of(1, 2, 3, 4, 5));
+
+		Function<List<Integer>, List<Integer>> square = arr -> {
+			List<Integer> res = new ArrayList<Integer>();
+			for (Integer i : arr) {
+				res.add(i * i);
+			}
+			return res;
+		};
+
+		Function<List<Integer>, List<Integer>> keepEven = arr -> {
+			List<Integer> res = new ArrayList<Integer>();
+			for (Integer i : arr) {
+				if (i % 2 == 0) {
+					res.add(i);
+				}
+			}
+			return res;
+		};
+
+		Function<List<Integer>, Integer> sum = arr -> {
+			Integer res = 0;
+			for (Integer i : arr) {
+				res += i;
+			}
+			return res;
+		};
+
+		Function<List<Integer>, Integer> squareKeepEvenSum = sum.compose(keepEven).compose(square);
+
+		System.out.println(squareKeepEvenSum.apply(numbers));
+		// Output: 20
+
+	}
+
+}
+```
+
+In addition to a simpler syntax, lambdas allow us to skip writing the type of the parameter since Java can infer the type from the interface.
