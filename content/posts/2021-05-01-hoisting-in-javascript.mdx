@@ -1,0 +1,148 @@
+---
+title: Hoisting in JavaScript
+date: 2021-05-01
+---
+
+On a high level, JavaScript code goes through two phases: **compilation** and **execution**. I say "on a high level" because there will actually be some more things going on under the hood. See [this answer](https://stackoverflow.com/a/51447411/5774633) on StackOverflow for a quick overview of what else happens in Chrome's V8 engine.
+
+Hoisting happens during the **compilation** phase. Function declarations and variables defined using the `var` keyword are moved to the top of their scope.[^1] This allows for weird things to happen like calling a function before it is defined.
+
+### Hoisting of functions
+
+Doing this in Python would give you an error:
+
+```python
+# hello.py
+
+say_hello()
+
+def say_hello():
+  print("Hello!")
+```
+
+```shell
+$ python3 hello.py
+Traceback (most recent call last):
+  File "hello.py", line 1, in <module>
+    say_hello()
+NameError: name 'say_hello' is not defined
+```
+
+But, it works perfectly fine in JavaScript!
+
+```javascript
+// hello.js
+
+sayHello();
+
+function sayHello() {
+  console.log("Hello!");
+}
+```
+
+```shell
+$ node hello.js
+Hello!
+```
+
+This is because the function is hoisted to the top of its scope. i.e. when execution of `hello.js` begins, the definition of `sayHello` is put into memory during the **compilation** phase.
+
+**Function expressions**, however, are not hoisted.
+
+```javascript
+// hello2.js
+
+sayHello();
+
+var sayHello = function() {
+  console.log("Hello!");
+}
+```
+
+```shell
+$ node hello2.js
+
+sayHello();
+^
+
+TypeError: sayHello is not a function
+  ...
+  ...
+  ...
+```
+
+### Hoisting of multiple functions with same name
+
+If there are multiple functions with the same name, they are hoisted in the order they are defined.
+
+```javascript
+// multifunc.js
+
+function foo() {
+  console.log("bar");
+}
+
+foo();
+
+function foo() {
+  console.log("baz");
+}
+```
+
+```shell
+$ node multifunc.js 
+baz
+```
+
+During the **compilation** phase, the first `foo` is loaded into memory. Then, the second one is loaded which overwrites the first one. Therefore, when `foo()` is called during the execution phase, the second function is executed.
+
+### Hoisting of variables
+
+Variables declared using the `var` keyword are hoisted to the top of the scope. However, only the declarations are hoisted and if there are any initializations, they remain exactly where they are.
+
+```javascript
+// foobar.js
+
+console.log(foo);
+var foo = "bar";
+console.log(foo);
+```
+
+```shell
+$ node foobar.js 
+undefined
+bar
+```
+
+Since only the declaration of the variable `foo` is hoisted, the first `console.log` statement logs `undefined`.
+
+Then, the variable is assigned the value "bar" which the next `console.log` statement logs.
+
+### Hoisting of variable and function with the same name
+
+If there is a variable declared using the `var` keyword and a function definition with the same name in a scope, **only the function is hoisted**.
+
+```javascript
+// varfunc.js
+
+console.log(foo);
+
+function foo() {
+  console.log("baz");
+}
+
+var foo = "bar";
+```
+
+```shell
+$ node varfunc.js
+[Function: foo]
+```
+
+## References
+
+ - [The old "var" (javascript.info)](https://javascript.info/var)
+ - [Function Hoisting & Hoisting Interview Questions (freecodecamp.org)](https://www.freecodecamp.org/news/function-hoisting-hoisting-interview-questions-b6f91dbc2be8/)
+ - [Hoisting - MDN Web Docs Glossary](https://developer.mozilla.org/en-US/docs/Glossary/Hoisting)
+
+[^1]: As described in the [MDN glossary entry for Hoisting](https://developer.mozilla.org/en-US/docs/Glossary/Hoisting), variables and functions being hoisted are not physically moved. They stay exactly where they are typed in the source code; their definitions are put into memory during the compilation phase.
