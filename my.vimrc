@@ -2,6 +2,10 @@ set number
 set encoding=utf-8
 syntax on
 
+" Set split direction
+set splitbelow
+set splitright
+
 " show whitespace characters
 set listchars=eol:$,tab:>·,trail:~,extends:>,precedes:<,space:·
 
@@ -68,10 +72,11 @@ au BufNewFile,BufRead *.py
     \ fileformat=unix
 
 " HTML/CSS/JS files
-" au BufNewFile,BufRead *.js, *.html, *.css
+au BufNewFile,BufRead *.js,*.html,*.css,*.jsx
      \ set tabstop=2
      \ softtabstop=2
      \ shiftwidth=2
+     \ expandtab
 
 " Flag unnecessary whitespace
 " Use the below highlight group when displaying bad whitespace is desired.
@@ -97,6 +102,9 @@ if 'VIRTUAL_ENV' in os.environ:
   exec(open(activate_this).read(), dict(__file__=activate_this))
 EOF
 
+" Ignore files in 'venv' and '__pycache__' dirs in ctrl-p
+let g:ctrlp_custom_ignore = '\v(venv|__pycache__)'
+
 " nerdtree mappings
 nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
@@ -118,3 +126,14 @@ nnoremap <leader>k <C-w>+
 
 " set powerline font for gui vim
 set guifont=Source\ Code\ Pro\ for\ Powerline:h14
+
+" Markdown support for Obsidian vault
+" export KB_DIRECTORY=/path/to/obsidian/vault
+au BufNewFile,BufRead *.md setlocal filetype=markdown
+au BufRead,BufNewFile $KB_DIRECTORY* setlocal path+=**
+set suffixesadd+=.md
+" open [[wikilinks]]
+nnoremap <leader>z F[lvt]gf
+" open [[renamed wikilinks|cool links]]
+nnoremap <leader>x F[lvt<bar>gf
+
