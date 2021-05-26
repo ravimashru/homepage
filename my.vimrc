@@ -39,6 +39,10 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 
+Plugin 'moll/vim-node'
+Plugin 'pangloss/vim-javascript'
+Plugin 'prashanthellina/follow-markdown-links'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
