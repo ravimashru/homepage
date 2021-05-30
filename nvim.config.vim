@@ -159,3 +159,9 @@ highlight BadWhitespace ctermbg=red guibg=red
 
 " Make trailing whitespace be flagged as bad.
 au BufRead,BufNewFile *.py,*.pyw,*.c,*.h,*.ts match BadWhitespace /\s\+$/
+
+" FIX: cursor not changing back to system settings on closing nvim
+" (System settings = blinking I-beam)
+" Source: https://github.com/neovim/neovim/issues/6665
+au VimLeave * set guicursor=a:ver100-blinkon1
+
