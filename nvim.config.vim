@@ -166,3 +166,6 @@ au BufRead,BufNewFile *.py,*.pyw,*.c,*.h,*.ts match BadWhitespace /\s\+$/
 " Source: https://github.com/neovim/neovim/issues/6665
 au VimLeave * set guicursor=a:ver100-blinkon1
 
+" Cycle through buffers
+:nnoremap <leader>k :bnext<CR>
+:nnoremap <leader>j :bprevious<CR>  
