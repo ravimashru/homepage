@@ -68,6 +68,15 @@ nnoremap <leader>m <C-w>-
 nnoremap <leader>k <C-w>+
 
 
+" PEP 8 indentation
+au BufNewFile,BufRead *.py
+    \ set tabstop=4
+    \ softtabstop=4
+    \ shiftwidth=4
+    \ textwidth=79
+    \ expandtab
+    \ autoindent
+    \ fileformat=unix
 
 " HTML/CSS/JS files
 au BufNewFile,BufRead *.js,*.html,*.css,*.jsx,*.ts
