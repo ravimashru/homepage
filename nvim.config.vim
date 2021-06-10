@@ -179,5 +179,5 @@ au BufRead,BufNewFile *.py,*.pyw,*.c,*.h,*.ts match BadWhitespace /\s\+$/
 au VimLeave * set guicursor=a:ver100-blinkon1
 
 " Cycle through buffers
-:nnoremap <leader>k :bnext<CR>
-:nnoremap <leader>j :bprevious<CR>  
+:nnoremap <leader>g :bnext<CR>
+:nnoremap <leader>h :bprevious<CR>  
