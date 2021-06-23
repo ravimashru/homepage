@@ -5,7 +5,7 @@ const Header = () => {
 
   const [collapsed, setCollapsed] = useState(true);
 
-  return <header>
+  return <header className={collapsed ? '': 'expanded'}>
     <div className="hdr-normal">
       <Link activeClassName="active-header-link" className="header-link" to="/">Home</Link>
       <Link activeClassName="active-header-link" className="header-link" to="/blog/">Blog</Link>
