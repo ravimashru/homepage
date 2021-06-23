@@ -13,11 +13,10 @@ export default function Projects() {
   
   const projects = [
     {
-      title: 'DataTau',
-      description:
-        'A newsboard for content related to Data Science, inspired by HackerNews.',
-      tags: ['datascience', 'webdev'],
-      url: 'https://github.com/datatau-net/DataTau',
+      title: 'ftbl.world',
+      description: 'A site to track live football scores and fixtures for all leagues worldwide',
+      tags: ['webdev'],
+      url: 'https://ftbl.world'
     },
     {
       title: 'Institute of AI',
@@ -44,26 +43,14 @@ export default function Projects() {
       title: 'Cellular Automata',
       description:
         'Cells that evolve over time based on the state of neighboring cells, forming a regular pattern regardless of which random initial state you start from.',
-      tags: [],
+      tags: ['webdev'],
       url: 'https://github.com/mashruravi/cellular-automata',
-    },
-    {
-      title: 'Skyworld',
-      description: 'A website for a travel agency.',
-      tags: ['webdev'],
-      url: 'https://github.com/mashruravi/skyworld-www',
-    },
-    {
-      title: 'The Holy Kitchen',
-      description: 'A website for a restaurant.',
-      tags: ['webdev'],
-      url: 'https://github.com/rahulperfect06/theholykitchen',
     },
     {
       title: 'Randomizer',
       description:
         'A small tool to pick a random item from a list, or randomize the order of items in a list.',
-      tags: [],
+      tags: ['webdev'],
       url: 'https://github.com/mashruravi/randomizer',
     },
   ];
