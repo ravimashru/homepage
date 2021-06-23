@@ -55,16 +55,23 @@ header {
   font-size: 36px;
   margin: 36px;
   display: grid;
-  grid-template-columns: minmax(250px, 25%) auto;
+  grid-template-columns: minmax(300px, 25%) auto;
 }
 
 .prf-hdr-intro > div {
   line-height: 36px;
-  margin-bottom: 36px;
+  margin-bottom: 16px;
+  margin-top: 16px;
+}
+
+.prf-hdr-intro strong {
+  color: #19B6FF;
 }
 
 .prf-hdr-img {
   margin: auto;
+  grid-row-start: 1;
+  grid-row-end: 3;
 }
 
 .prf-hdr-social {
@@ -342,7 +349,7 @@ footer {
   padding: 0;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 750px) {
   .prf-hdr-ctr {
     grid-template-columns: 100%;
     font-size: 24px;
@@ -427,7 +434,7 @@ footer {
   }
 }
 
-@media only screen and (min-width: 601px) and (max-width: 900px) {
+@media only screen and (min-width: 751px) and (max-width: 900px) {
   .prf-hdr-ctr {
     font-size: 26px;
   }

@@ -1,26 +1,20 @@
 import React from 'react';
-import memoji from '../images/memoji.png';
+import me from '../images/me.png';
 
 export default function ProfileHeader() {
   return (
     <div className="prf-hdr-ctr">
       <div className="prf-hdr-img">
-        {/* <div style={{ borderRadius: '100%', backgroundColor: 'gray', height: '135px', width: '115px' }}></div> */}
-        <img src={memoji} height="200px" alt="me" />
+        <img src={me} alt="me" style={{ objectFit: 'contain', width: '180px' }} />
       </div>
       <div className="prf-hdr-intro">
         <div>
           Hello! I am <strong>Ravi Mashru</strong>.
         </div>
         <div>
-          I am a <strong>full-stack developer</strong> and{' '}
-          <strong>GitHub administrator</strong>
-        </div>
-        <div>
-          at <strong>SAP Labs</strong> in <strong>Bangalore, India</strong>.
+          I'm a full-stack web developer.
         </div>
       </div>
-      <div></div>
       <div className="prf-hdr-social">
         <div className="social-icon si si-linkedin">
           <a
