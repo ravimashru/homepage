@@ -6,27 +6,45 @@ import { graphql } from 'gatsby';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 
+import externalPosts from './external-blog-posts.json';
+import { node } from 'prop-types';
+
 const formatDate = d => {
   return moment(d).format('MMMM D, YYYY');
 };
 
-const Blog = ({ data: { allMdx } }) => (
-  <Layout>
+const Blog = ({ data: { allMdx } }) => {
+
+  const posts = [...allMdx.edges, ...externalPosts];
+  posts.sort((a, b) => {
+    const date1 = new Date(a.hasOwnProperty('node') ? a.node.frontmatter.date: a.date);
+    const date2 = new Date(b.hasOwnProperty('node') ? b.node.frontmatter.date: b.date);
+
+    return date2.getTime() - date1.getTime();
+  });
+
+
+  return <Layout>
     <SEO title="Blog" />
     <h1 className="blog-header">Blog Posts</h1>
 
     <div className="blog-list">
-      {allMdx.edges.map(({ node }) => {
-        return (
-          <Link to={node.fields.slug} className="blog-list-item" key={node.id}>
-            <span>{node.frontmatter.title}</span>
-            <span>{formatDate(node.frontmatter.date)}</span>
+      {posts.map((post) => {
+        return post.hasOwnProperty('node') ? (
+          <Link to={post.node.fields.slug} className="blog-list-item" key={post.node.id}>
+            <span>{post.node.frontmatter.title}</span>
+            <span>{formatDate(post.node.frontmatter.date)}</span>
           </Link>
+        ): (
+          <a key={post.link} className="blog-list-item" href={post.link} target="_blank">
+            <span>{post.title}</span>
+            <span>{formatDate(post.date)}</span>
+          </a>
         );
       })}
     </div>
   </Layout>
-);
+};
 
 export default Blog;
 
