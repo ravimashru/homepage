@@ -35,21 +35,94 @@ A model is only as good as the data used to train it. The world is full of biase
 
 > Be sure to think carefully about the types of data that you might expect to see in practice in your application, and check carefully to ensure that all these types are reflected in your model's source data.
 
-## Fastai Jargon
-
-- DataLoaders
-- DataBlock (ImageBlock, CategoryBlock)
+## DataLoaders and DataBlock in Fastai
 
 A DataBlock provides a template to create an instance of a DataLoaders object.
 
+```python
+bears = DataBlock(
+        blocks=(ImageBlock, CategoryBlock),
+        get_items=get_image_files,
+        splitter=RandomSplitter(valid_pct=0.2, seed=42),
+        get_y=parent_label,
+        item_tfms=Resize(128))
+```
+
+- `ImageBlock`: the independent variable in our dataset is going to be images.
+- `CategoryBlock`: the dependent variable, i.e. the value we are trying to predict (type of bear) is of a categorical type.
+- `get_items=get_image_files`: use the `get_image_files` function to read images in the file paths that will be given to the DataBlock.
+- `splitter`: specify how to split the dataset into train/validation set. We put aside 20% of data in the validation set. The `seed` property ensures every time we run this piece of code, we get the same train/validation split. This is important for reproducibility.
+- `get_y=parent_label`: use the name of the parent folder of each image as the label.
+- `item_tfms=Resize(128)`: resize each image to 128 pixels high and wide.
+
 DataLoaders is a thin class that stores instances of DataLoader passed to it.
+
+```python
+dls = bears.dataloaders(path)
+```
+
+By default, it includes validation and training DataLoader objects.
 
 ## Data Augmentation
 
+In practice, when resizing images to a dimension of 128x128, we randomly select a part of the image of that size and crop to that part. On each epoch, a different part of the image is used. This allows the model to learn from different features in the image.
+
+This kind of augmentation can be achieved using the `RandomResizedCrop` function:
+
+```python
+item_tfms=RandomResizedCrop(128, min_scale=0.3)
+```
+
+The `min_scale` parameter specified how much of the image should be visible at minimum.
+
+When doing this, the model recognizes each part of the image as a completely new image. As a result, data augmentation allows us to train our model with effectively more samples than we have in our dataset. The model also learns about objects better when it sees them at different positions in an image.
+
+Other examples of data augmentation that can be used are:
+
+- Rotation
+- Flipping
+- Perspective warping
+- Brightness changes
+- Contrast changes
+
 ## Using Your Model to Clean Your Data
 
-## Model to Online Application!
+It is possible to use the predictions a trained model makes to clean the dataset by observing:
 
-### Locally
+1. The wrong predictions that the model makes (especially if the model is confident about the incorrect prediction)
+2. The right predictions that the model makes with very low confidence
 
-### Using Binder
+This approach can make it easy to find mislabelled images in the dataset.
+
+
+## Avoiding Disaster
+
+Examples of other things to consider when using deep learning as a part of a bigger system:
+
+- Managing multiple versions of models
+- A/B testing
+- Canarying
+- Refreshing data (let dataset keep growing vs. delete some old data)
+- Data labeling
+- Monitoring
+- Detecting model rot
+
+Problems that can occur in production:
+
+- Out-of-domain data: data that the model sees in production that is very different from what it saw during training. There is no complete technical solution to this problem and it needs to be handled while rolling out the product.
+
+- Domain shift: data that the model sees changes over time.
+
+The following deployment process can be used to mitigate the risks:
+
+1. Manual process: run deep learning model but don't use it to drive any actions. Instead, let human beings verify the model predictions and ensure they make sense.
+
+2. Limited scope deployment: use the model with close human supervision for a limited scope (e.g. small geographical area or short period of time)
+
+3. Gradual expansion: steadily increase scope of rollout. Ensure there are reporting systems in place to alert you about significant change in actions being taken compared to manual process used previously. Think about everything that could go wrong, what measure/report can reflect that problem and include it in regular reporting.
+
+Models may change behavior of system they are part of. Using data with bias to train a model may start a positive feedback loop (e.g. predictive policing model used to concentrate policing effort may use past data about police activity that is biased).
+
+> "The same technology that's the source of so much excitement in my career is being used in law enforcement in ways that could mean that in the coming years, my son, who is 7 now, is more likely to be profiled or arrested - or worse - for no reason other than his race and where we live."
+
+*Source: https://www.nytimes.com/2017/12/02/opinion/sunday/intelligent-policing-and-my-innocent-children.html*
