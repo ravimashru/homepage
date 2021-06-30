@@ -1,74 +1,78 @@
 import React from 'react';
 
-export default function Projects() {
+import ftblworldpng from '../images/projects/ftblworld.png';
+import portfoliopng from '../images/projects/portfolio.png';
+import obsidianpluginpng from '../images/projects/obsidianplugin.png';
+import denonetspng from '../images/projects/denonets.png';
+import gandalfpng from '../images/projects/gandalf.png';
+import tinyimagenetpng from '../images/projects/tinyimagenet.png';
 
-  const tags = {
-    datascience: 'Data Science',
-    webdev: 'Web Development',
-    educ: 'Education',
-    ai: 'Artificial Intelligence',
-    dl: 'Deep Learning',
-    cv: 'Computer Vision',
-  };
-  
+export default function Projects() {
   const projects = [
     {
       title: 'ftbl.world',
-      description: 'A site to track live football scores and fixtures for all leagues worldwide',
-      tags: ['webdev'],
-      url: 'https://ftbl.world'
+      description:
+        'A web application built using NestJS and React to view live football scores and fixtures of matches all over the world. Hosted on GitHub Pages and Heroku.',
+      image: ftblworldpng,
+      url: 'https://ftbl.world',
     },
     {
-      title: 'Institute of AI',
+      title: 'Portfolio',
       description:
-        'High quality and affordable training for everyone in the field of Artificial Intelligence.',
-      tags: ['educ', 'ai'],
-      url: 'https://github.com/instituteofai',
+        'This site! Built using React and Gatsby to host my professional information and blog.',
+      image: portfoliopng,
+      url: 'https://ravimashru.dev',
+    },
+    {
+      title: 'Obsidian Plugin - Show File Path',
+      description:
+        'An Obsidian plugin to show the path of the currently active file.',
+      image: obsidianpluginpng,
+      url: 'https://github.com/ravimashru/obsidian-show-file-path',
+    },
+    {
+      title: 'deno-nets',
+      description:
+        'A Typescript library to build, train and use deep neural networks in Deno. Built using Hacktoberfest 2020.',
+      image: denonetspng,
+      url: 'https://github.com/ravimashru/deno-nets',
     },
     {
       title: 'GANdalf',
       description:
-        'A Generative Adversarial Network (GAN) to convert sketches to photos and vice versa.',
-      tags: ['dl'],
-      url: 'https://github.com/mashruravi/GANdalf',
+        'A Generative Adversarial Network (GAN) to convert sketches to photos and vice versa. Built using TensorFlow.',
+      image: gandalfpng,
+      url: 'https://github.com/ravimashru/GANdalf',
     },
     {
-      title: 'clf-tiny-imagenet',
+      title: 'Tiny ImageNet Classifier',
       description:
-        'A multi-class classifier for images in the Tiny ImageNet dataset.',
-      tags: ['dl', 'cv'],
-      url: 'https://github.com/mashruravi/clf-tiny-imagenet/blob/master/A4_20.ipynb',
-    },
-    {
-      title: 'Cellular Automata',
-      description:
-        'Cells that evolve over time based on the state of neighboring cells, forming a regular pattern regardless of which random initial state you start from.',
-      tags: ['webdev'],
-      url: 'https://github.com/mashruravi/cellular-automata',
-    },
-    {
-      title: 'Randomizer',
-      description:
-        'A small tool to pick a random item from a list, or randomize the order of items in a list.',
-      tags: ['webdev'],
-      url: 'https://github.com/mashruravi/randomizer',
+        'A multi-class classifier for images in the Tiny ImageNet dataset. Built using TensorFlow.',
+      image: tinyimagenetpng,
+      url:
+        'https://github.com/ravimashru/clf-tiny-imagenet/blob/master/A4_20.ipynb',
     },
   ];
 
   return (
     <div className="section-container">
-      <div className="section-header">Projects</div>
+      <div className="section-header">Personal projects</div>
       <div className="section-body">
         {projects.map(e => {
           return (
-            <div key={e.title} className="proj-item" onClick={() => { window.open(e.url, '_blank') }}>
-              <div className="proj-item-title">{e.title}</div>
-              <div className="proj-item-desc">{e.description}</div>
-              <div className="proj-item-spacer"></div>
-              <div className="proj-item-tags">
-                {e.tags.map(t => (
-                  <div key={t} className={`proj-item-tags-itm tag-${t}`}>{tags[t]}</div>
-                ))}
+            <div
+              key={e.title}
+              className="proj-item"
+              onClick={() => {
+                window.open(e.url, '_blank');
+              }}
+            >
+              <div className="proj-item-image-ctr">
+                <img className="proj-item-image" src={e.image} />
+              </div>
+              <div className="proj-item-overlay">
+                <div className="proj-item-title">{e.title}</div>
+                <div className="proj-item-desc">{e.description}</div>
               </div>
             </div>
           );

@@ -13,7 +13,10 @@ export default function ProfileHeader() {
             Hello! I am <strong>Ravi Mashru</strong>.
           </div>
           <div>
-            I'm a full-stack web developer.
+            I'm a <b>full-stack web developer</b>,
+          </div>
+          <div>
+            and a <b>machine learning enthusiast</b>.
           </div>
         </div>
         <div className="prf-hdr-social">

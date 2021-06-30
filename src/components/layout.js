@@ -24,7 +24,7 @@ const Layout = ({ children }) => {
           paddingTop: '98px',
           minWidth: '350px',
           margin: 'auto',
-          maxWidth: maxPageWidth,
+          // maxWidth: maxPageWidth,
           minHeight: 'calc(100vh - 98px - 50px)'
         }}
       >

@@ -166,17 +166,17 @@ header.expanded {
 
 .section-header {
   color: #6c6c6c;
-  font-size: 18px;
+  font-size: 32px;
   font-weight: bold;
-  margin: 16px auto;
-  max-width: 800px;
+  text-align: center;
+  margin: 16px 0;
 }
 
 .section-body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  max-width: 1000px;
+  /* max-width: 1000px; */
   margin: 0 auto;
 }
 
@@ -200,16 +200,15 @@ header.expanded {
 }
 
 .proj-item {
-  width: 260px;
-  height: 300px;
+  width: 500px;
+  height: 380px;
   box-shadow: 0 0 8px 0px rgba(0, 0, 0, 0.2), 0 0 50px 0px rgba(0, 0, 0, 0.09);
-  margin: 32px;
-  padding: 16px;
+  margin: 24px;
   color: #6c6c6c;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-
+  position: relative;
   cursor: pointer;
   transition: box-shadow 200ms ease-out;
 }
@@ -218,55 +217,49 @@ header.expanded {
   box-shadow: 0 0 16px 0px rgba(0, 0, 0, 0.2), 0 0 50px 0px rgba(0, 0, 0, 0.09);
 }
 
+.proj-item:hover .proj-item-overlay {
+  opacity: 1;
+}
+
+.proj-item-image-ctr {
+  width: 100%;
+  height: 100%;
+}
+
+.proj-item-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.proj-item-overlay {
+  opacity: 0;
+  padding: 16px;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transition: opacity 500ms;
+}
+
 .proj-item-title {
   font-size: 24px;
+  font-weight: bold;
   margin: 24px 0;
   text-align: center;
 }
 
 .proj-item-desc {
-  font-size: 16px;
+  font-size: 24px;
   margin: 0 16px;
+  text-align: center;
 }
 
 .proj-item-spacer {
   margin: auto;
-}
-
-.proj-item-tags {
-  display: flex;
-}
-
-.proj-item-tags-itm {
-  margin-right: 4px;
-  font-size: 12px;
-  padding: 4px 12px;
-  border-radius: 10px;
-  color: white;
-}
-
-.tag-datascience {
-  background-color: #ff6060;
-}
-
-.tag-webdev {
-  background-color: #209d21;
-}
-
-.tag-educ {
-  background-color: #ff9628;
-}
-
-.tag-ai {
-  background-color: #20259d;
-}
-
-.tag-dl {
-  background-color: #a907c4;
-}
-
-.tag-cv {
-  background-color: #a8a600;
 }
 
 footer {
@@ -389,10 +382,6 @@ footer {
     padding: 0;
   }
 
-  .section-header {
-    text-align: center;
-  }
-
   .tech-item {
     width: 110px;
   }
@@ -406,8 +395,8 @@ footer {
   }
 
   .proj-item {
-    width: 220px;
-    height: 260px;
+    width: 300px;
+    height: 220px;
     margin: 24px;
   }
 
@@ -418,12 +407,7 @@ footer {
   }
 
   .proj-item-desc {
-    font-size: 14px;
-  }
-
-  .proj-item-tags-itm {
-    font-size: 10px;
-    padding: 4px 8px;
+    font-size: 16px;
   }
 
   footer {
@@ -449,13 +433,9 @@ footer {
     margin: 32px 16px;
   }
 
-  .section-header {
-    margin-left: 48px;
-  }
-
   .proj-item {
-    width: 220px;
-    height: 260px;
+    width: 300px;
+    height: 220px;
     margin: 24px;
   }
 
@@ -466,12 +446,7 @@ footer {
   }
 
   .proj-item-desc {
-    font-size: 14px;
-  }
-
-  .proj-item-tags-itm {
-    font-size: 10px;
-    padding: 4px 8px;
+    font-size: 16px;
   }
 
   footer {
