@@ -6,6 +6,7 @@ import obsidianpluginpng from '../images/projects/obsidianplugin.png';
 import denonetspng from '../images/projects/denonets.png';
 import gandalfpng from '../images/projects/gandalf.png';
 import tinyimagenetpng from '../images/projects/tinyimagenet.png';
+import rpsclfpng from '../images/projects/rpsclf.png';
 
 export default function Projects() {
   const projects = [
@@ -15,6 +16,13 @@ export default function Projects() {
         'A web application built using NestJS and React to view live football scores and fixtures of matches all over the world. Hosted on GitHub Pages and Heroku.',
       image: ftblworldpng,
       url: 'https://ftbl.world',
+    },
+    {
+      title: 'Rock Paper Scissors Classifier',
+      description:
+        'A rock-paper-scissors classifier built using fast.ai while reading chapter 2 of fastbook.',
+      image: rpsclfpng,
+      url: 'https://github.com/ravimashru/rps-classifier',
     },
     {
       title: 'Portfolio',
