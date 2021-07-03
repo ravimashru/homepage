@@ -58,7 +58,7 @@ export default function Projects() {
         'A multi-class classifier for images in the Tiny ImageNet dataset. Built using TensorFlow.',
       image: tinyimagenetpng,
       url:
-        'https://github.com/ravimashru/clf-tiny-imagenet/blob/master/A4_20.ipynb',
+        'https://github.com/ravimashru/clf-tiny-imagenet',
     },
   ];
 
