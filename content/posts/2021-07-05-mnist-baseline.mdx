@@ -1,0 +1,188 @@
+---
+title: MNIST Baseline using Pixel Similarity
+date: 2021-07-05
+---
+
+import Image from '../../src/components/image';
+
+<Image name="MNIST_Baseline_pixel_similarity.png" />
+
+# Baseline for MNIST Handwritten Digit Classification using Pixel Similarity
+
+To create a baseline model for the MNIST handwritten digits classification problem, we expand the approach used in [chapter 4 of fastbook](https://github.com/fastai/fastbook/blob/master/04_mnist_basics.ipynb).
+
+In the book, the average pixel value for every pixel of two numbers - 3 and 7 is calculated. The pixel values of images in the test set are then compared to these averages (using the L1-norm and the RMSE values) and the digit is classified as the average to which the new image is "closer".
+
+We can use the same approach to calculate the average pixel value of every pixel for each of the 10 digits in the MNIST handwritten digits dataset. This gives us 10 "mean pixel images". And then for each image in the test set, we calculate the distance of its pixels from each of the 10 mean pixel images and classify the image as the one from which it is the shortest distance away.
+
+
+```python
+from fastai.vision import *
+```
+
+First, we download and extract the entire MNIST handwritten digits dataset instead of the sample dataset.
+
+
+```python
+path = untar_data(URLs.MNIST)
+```
+
+    Downloading https://s3.amazonaws.com/fast-ai-imageclas/mnist_png.tgz
+
+
+
+
+
+```python
+path.ls()
+```
+
+
+
+
+    [PosixPath('/root/.fastai/data/mnist_png/testing'),
+     PosixPath('/root/.fastai/data/mnist_png/training')]
+
+
+
+
+```python
+training_paths = [(path/'training'/str(i)) for i in range(10)]
+testing_paths = [(path/'testing'/str(i)) for i in range(10)]
+```
+
+
+```python
+training_paths
+```
+
+
+
+
+    [PosixPath('/root/.fastai/data/mnist_png/training/0'),
+     PosixPath('/root/.fastai/data/mnist_png/training/1'),
+     PosixPath('/root/.fastai/data/mnist_png/training/2'),
+     PosixPath('/root/.fastai/data/mnist_png/training/3'),
+     PosixPath('/root/.fastai/data/mnist_png/training/4'),
+     PosixPath('/root/.fastai/data/mnist_png/training/5'),
+     PosixPath('/root/.fastai/data/mnist_png/training/6'),
+     PosixPath('/root/.fastai/data/mnist_png/training/7'),
+     PosixPath('/root/.fastai/data/mnist_png/training/8'),
+     PosixPath('/root/.fastai/data/mnist_png/training/9')]
+
+
+
+We then convert the images to tensors.
+
+
+```python
+training_tensors = [torch.stack([open_image(l).data[0] for l in p.ls()]) for p in training_paths]
+testing_tensors = [torch.stack([open_image(l).data[0] for l in p.ls()]) for p in testing_paths]
+```
+
+
+```python
+len(training_tensors), len(testing_tensors)
+```
+
+
+
+
+    (10, 10)
+
+
+
+We now calculate the mean value of each pixel for each of the digits, using the images in the training set.
+
+
+```python
+mean_tensors = [tr.mean(0) for tr in training_tensors]
+mean_images = [Image(1 - mtr.repeat(3, 1, 1)) for mtr in mean_tensors]
+show_all(mean_images)
+```
+
+
+​    
+![png](MNIST_Baseline_files/MNIST_Baseline_11_0.png)
+​    
+
+
+
+```python
+testing_tensors[0].shape, mean_tensors[0].shape
+```
+
+
+
+
+    (torch.Size([980, 28, 28]), torch.Size([28, 28]))
+
+
+
+We then iterate over every image in the test set and calculate their distance from each of the 10 images we generated above. We use RMSE to calculate the distance.
+
+We keep track of how many images are correctly classified using the `correct` list and the total number of images in the class using the `total` list.
+
+
+```python
+correct = []
+total = []
+
+for i in range(10):
+  total.append(testing_tensors[i].shape[0])
+  preds = torch.Tensor([
+          torch.stack(
+              [
+                F.mse_loss(testing_tensors[i][imgidx], mean_tensors[midx]).sqrt()
+                for midx in range(10)
+              ]
+            ).argmin()
+            for imgidx in range(testing_tensors[i].shape[0])
+        ])
+
+  correct.append((preds == i).sum())
+
+correct, total
+```
+
+
+
+
+    ([tensor(878),
+      tensor(1092),
+      tensor(781),
+      tensor(814),
+      tensor(811),
+      tensor(612),
+      tensor(827),
+      tensor(856),
+      tensor(718),
+      tensor(814)],
+     [980, 1135, 1032, 1010, 982, 892, 958, 1028, 974, 1009])
+
+
+
+We can then sum the count of correct predictions for each class and divide that by the total number of images in the test set to get the accuracy of this baseline model.
+
+
+```python
+torch.Tensor(correct).sum(), torch.Tensor(total).sum()
+```
+
+
+
+
+    (tensor(8203.), tensor(10000.))
+
+
+
+
+```python
+print('Accuracy: ', torch.Tensor(correct).sum()/torch.Tensor(total).sum())
+```
+
+    Accuracy:  tensor(0.8203)
+
+
+This baseline model gives us an accuracy of 82.03% on this dataset.
+

@@ -13,7 +13,7 @@ export default function ProfileHeader() {
             Hello! I am <strong>Ravi Mashru</strong>.
           </div>
           <div>
-            I'm a <b>full-stack web developer</b>,
+            I'm a <b>full-stack developer</b>,
           </div>
           <div>
             and a <b>machine learning enthusiast</b>.
