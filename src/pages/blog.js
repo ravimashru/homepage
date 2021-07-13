@@ -7,18 +7,36 @@ import Layout from '../components/layout';
 import SEO from '../components/seo';
 
 import externalPosts from './external-blog-posts.json';
-import { node } from 'prop-types';
 
 const formatDate = d => {
   return moment(d).format('MMMM D, YYYY');
 };
 
-const Blog = ({ data: { allMdx } }) => {
+const Blog = ({ data: { allMdx, allJupyterNotebook } }) => {
 
-  const posts = [...allMdx.edges, ...externalPosts];
+  const convertJupyterNotebookFields = (e) => {
+    return {
+      node: {
+        id: e.node.id,
+        frontmatter: {
+          date: e.node.json.metadata.date,
+          title: e.node.json.metadata.title,
+        },
+        fields: {
+          slug: e.node.fields.slug
+        },
+      }
+    };
+  };
+
+  const posts = [
+    ...allMdx.edges,
+    ...externalPosts,
+    ...allJupyterNotebook.edges.map(convertJupyterNotebookFields),
+  ];
   posts.sort((a, b) => {
-    const date1 = new Date(a.hasOwnProperty('node') ? a.node.frontmatter.date: a.date);
-    const date2 = new Date(b.hasOwnProperty('node') ? b.node.frontmatter.date: b.date);
+    const date1 = new Date(a.hasOwnProperty('node') ? a.node.frontmatter.date : a.date);
+    const date2 = new Date(b.hasOwnProperty('node') ? b.node.frontmatter.date : b.date);
 
     return date2.getTime() - date1.getTime();
   });
@@ -35,7 +53,7 @@ const Blog = ({ data: { allMdx } }) => {
             <span>{post.node.frontmatter.title}</span>
             <span>{formatDate(post.node.frontmatter.date)}</span>
           </Link>
-        ): (
+        ) : (
           <a key={post.link} className="blog-list-item" href={post.link} target="_blank">
             <span>{post.title}</span>
             <span>{formatDate(post.date)}</span>
@@ -57,6 +75,22 @@ export const pageQuery = graphql`
           frontmatter {
             title
             date
+          }
+          fields {
+            slug
+          }
+        }
+      }
+    }
+    allJupyterNotebook {
+      edges {
+        node {
+          id
+          json {
+            metadata {
+              title
+              date
+            }
           }
           fields {
             slug

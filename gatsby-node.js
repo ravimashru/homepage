@@ -11,7 +11,7 @@ const { createFilePath } = require('gatsby-source-filesystem');
 // Automatically generate slugs for MDX files (blog posts)
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions;
-  if (node.internal.type === 'Mdx') {
+  if (node.internal.type === 'Mdx' || node.internal.type === 'JupyterNotebook') {
     const value = createFilePath({ node, getNode });
     createNodeField({
       name: 'slug',
@@ -26,7 +26,7 @@ const path = require('path');
 // Create pages for blog posts
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions;
-  const result = await graphql(`
+  const mdxResult = await graphql(`
     query {
       allMdx {
         edges {
@@ -41,16 +41,45 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     }
   `);
 
-  if (result.errors) {
-    reporter.panicOnBuild('🚨  ERROR: Loading "createPages" query');
+  const jupyterResult = await graphql(`
+    query {
+      allJupyterNotebook {
+        edges {
+          node {
+            id
+            fields {
+              slug
+            }
+          }
+        }
+      }
+    }
+  `);
+
+  if (mdxResult.errors) {
+    reporter.panicOnBuild('🚨  ERROR: Loading "createPages" query for mdx posts');
   }
 
-  const posts = result.data.allMdx.edges;
+  if (jupyterResult.errors) {
+    reporter.panicOnBuild('🚨  ERROR: Loading "createPages" query for jupyter posts');
+  }
 
-  posts.forEach(({ node }) => {
+  const mdxPosts = mdxResult.data.allMdx.edges;
+
+  mdxPosts.forEach(({ node }) => {
     createPage({
       path: node.fields.slug,
       component: path.resolve('./src/components/blog-layout.js'),
+      context: { id: node.id }
+    });
+  });
+
+  const jupyterPosts = jupyterResult.data.allJupyterNotebook.edges;
+
+  jupyterPosts.forEach(({ node }) => {
+    createPage({
+      path: node.fields.slug,
+      component: path.resolve('./src/components/jupyter-blog-layout.js'),
       context: { id: node.id }
     });
   });

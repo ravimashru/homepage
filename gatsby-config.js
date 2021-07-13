@@ -27,6 +27,22 @@ module.exports = {
         path: `${__dirname}/content/images/`,
       }
     },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `notebooks`,
+        path: `${__dirname}/content/notebooks/`
+      }
+    },
+    {
+      resolve: `@rafaelquintanilha/gatsby-transformer-ipynb`,
+      options: {
+        notebookProps: {
+          displayOrder: ["image/png", "text/html", "text/plain"],
+          showPrompt: false,
+        },
+      },
+    },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
