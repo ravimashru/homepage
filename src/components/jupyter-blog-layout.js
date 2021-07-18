@@ -3,6 +3,8 @@ import Layout from './layout';
 import SEO from './seo';
 import { graphql } from 'gatsby';
 
+require(`katex/dist/katex.min.css`);
+
 export default function JupyterBlogLayout({
   data: {
     jupyterNotebook: {
