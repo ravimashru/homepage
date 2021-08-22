@@ -497,6 +497,33 @@ footer {
   color: black;
 }
 
+.jupyter-blog-body img {
+  width: 100%;
+}
+
+.jupyter-blog-body pre code {
+  font-size: 1rem !important;
+  font-family: Courier, monospace !important;
+}
+
+.jupyter-blog-body pre code {
+  font-size: 1rem !important;
+  font-family: Courier, monospace !important;
+}
+
+.jupyter-blog-body table {
+  border-collapse: collapse !important;
+}
+
+.jupyter-blog-body table thead th {
+  text-align: center;
+  padding: 4px;
+}
+
+.jupyter-blog-body table td {
+  padding: 2px 6px;
+}
+
 /* html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
