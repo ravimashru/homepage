@@ -331,9 +331,9 @@ footer {
   text-align: justify;
 }
 
-.blog-body code {
-  background-color: lightgray;
-  padding: 4px 6px;
+.blog-body code,.jupyter-blog-body code {
+  font-size: 1.2em;
+  padding: 0 4px;
 }
 
 .blog-body pre {
@@ -345,6 +345,10 @@ footer {
 
 .blog-body pre code {
   padding: 0;
+}
+
+.math {
+  overflow-x: auto;
 }
 
 @media only screen and (max-width: 750px) {
