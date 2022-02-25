@@ -1,16 +1,12 @@
 import React from 'react';
 import { Link } from 'gatsby';
-import * as moment from 'moment';
 import { graphql } from 'gatsby';
 
+import { formatDate } from '../utils';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 
 import externalPosts from './external-blog-posts.json';
-
-const formatDate = d => {
-  return moment(d).format('MMMM D, YYYY');
-};
 
 const Blog = ({ data: { allMdx, allJupyterNotebook } }) => {
 

@@ -16,9 +16,11 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
     let slugPrefix = "/blog";
 
     // https://github.com/gatsbyjs/gatsby/issues/1634#issuecomment-619670883
-    if (getNode(node.parent).sourceInstanceName === "notes") {
+    const isNote = getNode(node.parent).sourceInstanceName === "notes";
+
+    if (isNote) {
       slugPrefix = "/notes"
-    } 
+    }
 
     const value = slugify(createFilePath({ node, getNode }));
     createNodeField({
@@ -26,6 +28,13 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
       node,
       value: urlResolve(slugPrefix, value),
     });
+
+    createNodeField({
+      node,
+      name: 'isNote',
+      value: isNote
+    });
+
 
   }
 };
@@ -43,6 +52,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
             id
             fields {
               slug
+              isNote
             }
           }
         }
@@ -76,9 +86,12 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   const mdxPosts = mdxResult.data.allMdx.edges;
 
   mdxPosts.forEach(({ node }) => {
+    console.log(node.fields.isNote)
     createPage({
       path: node.fields.slug,
-      component: path.resolve('./src/components/blog-layout.js'),
+      component: node.fields.isNote
+                  ? path.resolve('./src/components/note-layout.js')
+                  : path.resolve('./src/components/blog-layout.js'),
       context: { id: node.id }
     });
   });
