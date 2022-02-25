@@ -4,20 +4,29 @@
  * See: https://www.gatsbyjs.org/docs/node-apis/
  */
 
-// You can delete this file if you're not using it
-
+const slugify = require('slugify');
+const { urlResolve } = require('gatsby-core-utils');
 const { createFilePath } = require('gatsby-source-filesystem');
 
 // Automatically generate slugs for MDX files (blog posts)
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions;
   if (node.internal.type === 'Mdx' || node.internal.type === 'JupyterNotebook') {
-    const value = createFilePath({ node, getNode });
+
+    let slugPrefix = "/blog";
+
+    // https://github.com/gatsbyjs/gatsby/issues/1634#issuecomment-619670883
+    if (getNode(node.parent).sourceInstanceName === "notes") {
+      slugPrefix = "/notes"
+    } 
+
+    const value = slugify(createFilePath({ node, getNode }));
     createNodeField({
       name: 'slug',
       node,
-      value: `/blog${value}`,
+      value: urlResolve(slugPrefix, value),
     });
+
   }
 };
 

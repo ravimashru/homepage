@@ -35,6 +35,14 @@ module.exports = {
       }
     },
     {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `notes`,
+        path: `${__dirname}/content/notes/`,
+        ignore: [`**/\.*`]
+      }
+    },
+    {
       resolve: `@rafaelquintanilha/gatsby-transformer-ipynb`,
       options: {
         notebookProps: {
@@ -56,7 +64,30 @@ module.exports = {
         icon: `src/images/rm-hires.png`, // This path is relative to the root of the site.
       },
     },
-    `gatsby-plugin-mdx`
+    `gatsby-remark-images`,
+    {
+      resolve: `gatsby-plugin-mdx`,
+      options: {
+        extensions: [".md", ".mdx"],
+        gatsbyRemarkPlugins: [
+          {
+            resolve: `gatsby-remark-double-brackets-link`,
+            options: {
+              parseWikiLinks: true,
+              stripBrackets: true,
+              titleToURLPath: `${__dirname}/resolve-notes-url.js`
+            }
+          },
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 500,
+            },
+          },
+        ]
+      }
+    },
+    `gatsby-remark-copy-linked-files`
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
