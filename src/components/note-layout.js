@@ -7,13 +7,15 @@ import { MDXProvider } from '@mdx-js/react'
 import CodeBlock from './code-block'
 import { formatDate } from '../utils';
 
-// import './css/tufte.css'
+import './css/tufte.scss'
 
-export default function NoteLayout({ data: { mdx } }) {
+export default function NoteLayout({ data: { markdownRemark } }) {
 
-const components = {
-  pre: props => <div {...props} />,
-  code: props => <CodeBlock {...props} />
+  const mdx = markdownRemark
+
+  const components = {
+    pre: props => <div {...props} />,
+    code: props => <CodeBlock {...props} />
 }
 
   return (
@@ -22,10 +24,10 @@ const components = {
       <div className="notes-content">
         <h1>{mdx.frontmatter.title}</h1>
         <em>Last updated: {formatDate(mdx.frontmatter.updated)}</em>
-        <div className="notes-body">
-          <MDXProvider components={components}>
-            <main><MDXRenderer>{mdx.body}</MDXRenderer></main>
-          </MDXProvider>
+        <div className="notes-body" dangerouslySetInnerHTML={{__html: mdx.html}}>
+          {/* <MDXProvider components={components}>
+            <main><MDXRenderer>{mdx.html}</MDXRenderer></main>
+          </MDXProvider> */}
         </div>
       </div>
     </Layout>
@@ -34,9 +36,9 @@ const components = {
 
 export const pageQuery = graphql`
   query NoteQuery($id: String) {
-    mdx(id: { eq: $id }) {
+    markdownRemark(id: { eq: $id }) {
       id
-      body
+      html
       frontmatter {
         title
         updated

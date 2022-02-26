@@ -67,6 +67,12 @@ module.exports = {
         icon: `src/images/rm-hires.png`, // This path is relative to the root of the site.
       },
     },
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [`gatsby-remark-tufte`]
+      }
+    },
     `gatsby-remark-images`,
     {
       resolve: `gatsby-plugin-mdx`,

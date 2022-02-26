@@ -11,7 +11,7 @@ const { createFilePath } = require('gatsby-source-filesystem');
 // Automatically generate slugs for MDX files (blog posts)
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions;
-  if (node.internal.type === 'Mdx' || node.internal.type === 'JupyterNotebook') {
+  if (node.internal.type === 'Mdx' || node.internal.type === 'JupyterNotebook' || node.internal.type === 'MarkdownRemark') {
 
     let slugPrefix = "/blog";
 
@@ -60,6 +60,22 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     }
   `);
 
+  const mdRemarkResult = await graphql(`
+    query {
+      allMarkdownRemark {
+        edges {
+          node {
+            id
+            fields {
+              slug
+              isNote
+            }
+          }
+        }
+      }
+    }
+  `);
+
   // const jupyterResult = await graphql(`
   //   query {
   //     allJupyterNotebook {
@@ -79,21 +95,36 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     reporter.panicOnBuild('🚨  ERROR: Loading "createPages" query for mdx posts');
   }
 
+  if (mdRemarkResult.errors) {
+    reporter.panicOnBuild('🚨  ERROR: Loading "createPages" query for md notes');
+  }
+
   // if (jupyterResult.errors) {
   //   reporter.panicOnBuild('🚨  ERROR: Loading "createPages" query for jupyter posts');
   // }
 
   const mdxPosts = mdxResult.data.allMdx.edges;
 
-  mdxPosts.forEach(({ node }) => {
-    console.log(node.fields.isNote)
-    createPage({
-      path: node.fields.slug,
-      component: node.fields.isNote
-                  ? path.resolve('./src/components/note-layout.js')
-                  : path.resolve('./src/components/blog-layout.js'),
-      context: { id: node.id }
-    });
+  mdxPosts
+    .filter(({ node }) => !node.fields.isNote)
+    .forEach(({ node }) => {
+      createPage({
+        path: node.fields.slug,
+        component: path.resolve('./src/components/blog-layout.js'),
+        context: { id: node.id }
+      });
+  });
+
+  const notes = mdRemarkResult.data.allMarkdownRemark.edges;
+
+  notes
+    .filter(({ node }) => node.fields.isNote)
+    .forEach(({ node }) => {
+      createPage({
+        path: node.fields.slug,
+        component: path.resolve('./src/components/note-layout.js'),
+        context: { id: node.id }
+      });
   });
 
   // const jupyterPosts = jupyterResult.data.allJupyterNotebook.edges;
