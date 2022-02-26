@@ -60,28 +60,28 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     }
   `);
 
-  const jupyterResult = await graphql(`
-    query {
-      allJupyterNotebook {
-        edges {
-          node {
-            id
-            fields {
-              slug
-            }
-          }
-        }
-      }
-    }
-  `);
+  // const jupyterResult = await graphql(`
+  //   query {
+  //     allJupyterNotebook {
+  //       edges {
+  //         node {
+  //           id
+  //           fields {
+  //             slug
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }
+  // `);
 
   if (mdxResult.errors) {
     reporter.panicOnBuild('🚨  ERROR: Loading "createPages" query for mdx posts');
   }
 
-  if (jupyterResult.errors) {
-    reporter.panicOnBuild('🚨  ERROR: Loading "createPages" query for jupyter posts');
-  }
+  // if (jupyterResult.errors) {
+  //   reporter.panicOnBuild('🚨  ERROR: Loading "createPages" query for jupyter posts');
+  // }
 
   const mdxPosts = mdxResult.data.allMdx.edges;
 
@@ -96,14 +96,14 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     });
   });
 
-  const jupyterPosts = jupyterResult.data.allJupyterNotebook.edges;
+  // const jupyterPosts = jupyterResult.data.allJupyterNotebook.edges;
 
-  jupyterPosts.forEach(({ node }) => {
-    createPage({
-      path: node.fields.slug,
-      component: path.resolve('./src/components/jupyter-blog-layout.js'),
-      context: { id: node.id }
-    });
-  });
+  // jupyterPosts.forEach(({ node }) => {
+  //   createPage({
+  //     path: node.fields.slug,
+  //     component: path.resolve('./src/components/jupyter-blog-layout.js'),
+  //     context: { id: node.id }
+  //   });
+  // });
 
 };

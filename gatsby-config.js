@@ -5,6 +5,18 @@ module.exports = {
     author: `@mashruravi`,
   },
   plugins: [
+    `gatsby-plugin-postcss`,
+    {
+      resolve: `gatsby-plugin-sass`,
+      options: {
+        cssLoaderOptions: {
+          esModule: false,
+          modules: {
+            namedExport: false
+          }
+        }
+      }
+    },
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,
@@ -41,15 +53,6 @@ module.exports = {
         path: `${__dirname}/content/notes/`,
         ignore: [`**/\.*`]
       }
-    },
-    {
-      resolve: `@rafaelquintanilha/gatsby-transformer-ipynb`,
-      options: {
-        notebookProps: {
-          displayOrder: ["image/png", "text/html", "text/plain"],
-          showPrompt: false,
-        },
-      },
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,

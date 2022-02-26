@@ -8,27 +8,11 @@ import SEO from '../components/seo';
 
 import externalPosts from './external-blog-posts.json';
 
-const Blog = ({ data: { allMdx, allJupyterNotebook } }) => {
-
-  const convertJupyterNotebookFields = (e) => {
-    return {
-      node: {
-        id: e.node.id,
-        frontmatter: {
-          date: e.node.json.metadata.date,
-          title: e.node.json.metadata.title,
-        },
-        fields: {
-          slug: e.node.fields.slug
-        },
-      }
-    };
-  };
+const Blog = ({ data: { allMdx } }) => {
 
   const posts = [
     ...allMdx.edges,
     ...externalPosts,
-    ...allJupyterNotebook.edges.map(convertJupyterNotebookFields),
   ];
   posts.sort((a, b) => {
     const date1 = new Date(a.hasOwnProperty('node') ? a.node.frontmatter.date : a.date);
@@ -71,22 +55,6 @@ export const pageQuery = graphql`
           frontmatter {
             title
             date
-          }
-          fields {
-            slug
-          }
-        }
-      }
-    }
-    allJupyterNotebook {
-      edges {
-        node {
-          id
-          json {
-            metadata {
-              title
-              date
-            }
           }
           fields {
             slug
